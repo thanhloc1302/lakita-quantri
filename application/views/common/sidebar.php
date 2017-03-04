@@ -217,6 +217,18 @@
                         </span>
                     </a>
                 </li>
+                
+                <li class="learn">
+                    <a href="<?php echo base_url(); ?>exercise">
+                        <i class="fa fa fa-file-text"></i>
+                        <span class="title">
+                            Bài tập học viên
+                        </span>
+                        <span class="selected">
+                        </span>
+                    </a>
+                </li>
+                
             <?php } ?>
 <?php if ($this->admin_id == 35 || $this->admin_id == 38) { ?>
                 <li class="student">
