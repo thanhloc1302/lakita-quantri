@@ -46,7 +46,7 @@
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>learn">
+                        <a href="<?php echo base_url(); ?>exercise">
                             Bài tập học viên
                         </a>
                     </li>
@@ -91,33 +91,70 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <div class="btn-group">
-                                <strong>Số bản ghi : </strong>
+                                <strong>Hiện số bản ghi : </strong>
                                 <label for="">
-                                    <select size="1" class="per_page form-control input-small">
-                                        <?php
-                                        $session_per_page = $this->session->userdata('session_per_page');
-                                        if (isset($session_per_page) && $session_per_page > 0)
-                                            $per_page = $session_per_page;
-                                        else
-                                            $per_page = 10;
-                                        ?>
-                                        <option <?php if ($per_page == 10) echo 'selected="selected"'; ?> value="10">Hiện 10</option>
-                                        <option <?php if ($per_page == 20) echo 'selected="selected"'; ?> value="20">Hiện 20</option>
-                                        <option <?php if ($per_page == 30) echo 'selected="selected"'; ?> value="30">Hiện 30</option>
-                                        <option <?php if ($per_page == 50) echo 'selected="selected"'; ?> value="50">Hiện 50</option>
-                                    </select>
-                                </label>
+
+									<select size="1" class="per_page form-control input-small">
+
+				                        <?php $session_per_page = $this->session->userdata('session_per_page');
+
+				                        if(isset($session_per_page) && $session_per_page>0)
+
+				                            $per_page = $session_per_page;
+
+				                        else $per_page = 10; ?>
+
+				                        <option <?php if($per_page==10) echo 'selected="selected"'; ?> value="10">Hiện 10</option>
+
+				                        <option <?php if($per_page==20) echo 'selected="selected"'; ?> value="20">Hiện 20</option>
+
+				                        <option <?php if($per_page==30) echo 'selected="selected"'; ?> value="30">Hiện 30</option>
+
+				                        <option <?php if($per_page==50) echo 'selected="selected"'; ?> value="50">Hiện 50</option>
+
+				                    </select>
+
+								</label>
                             </div>
                             <div class="btn-group pull-right">
+                                        <form action="<?php echo base_url(); ?>exercise/search" method="post">
 
+									<?php if('comenu'=='comenu'){ ?> 
+
+									<label for="">
+
+					                    <select size="1" class="form-control input-medium" name="courses_id">
+                                                <option <?php if (isset($khoa) && $khoa == 0) echo 'selected="selected"'; ?> value="0">Tất cả</option>
+                                                        <?php foreach ($khoa as $khoa5 => $cour) { ?>
+                                                    <option <?php if (isset($courses_id) && $courses_id == $cour['id']) echo 'selected="selected"'; ?> value="<?php echo $cour['id']; ?>"><?php echo $cour['name']; ?></option>
+                                        <?php } ?>
+                                            </select>
+                                                                        </label>
+                                            
+									 <?php } ?>
+                                            
+                                            <label class="hidden"><input type="text" name="key_word" <?php if (isset($key_word) && $key_word != 'empty') { ?> value="<?php echo $key_word; ?>" <?php } else { ?> placeholder="Từ khóa tìm kiếm" <?php } ?> class="form-control input-medium input-inline"></label>
+
+                                    <button class="btn purple">
+
+                                        <i class="fa fa-search"></i> Tìm
+
+                                    </button>
+
+                                    <?php if (isset($is_search)) { ?>
+
+                                             <a href="<?php echo base_url(); ?>exercise" class="btn red">Hủy</a>
+
+<?php } ?>
+                                        </form>
 
                             </div>
                         </div>
 
 
 
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
+                        
+                            <table class="table table-bordered" id="sample_1">
 
                                 <thead>
                                     <tr>
@@ -133,37 +170,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($exercise as $key => $value) { ?>
+                                    
+                                    <?php 
+                                    foreach ($rows as $key => $value) { ?>
                                         <tr>
-                                            <th><?php echo $value['id']; ?></th>
-                                            <th><?php echo date('H:i:s d/m/Y', $value['time']); ?></th>
-                                            <th><?php
+                                            <td><?php echo $value['id']; ?></td>
+                                            <td><?php echo date('H:i:s d/m/Y', $value['time']); ?></td>
+                                            <td><?php
                                                 foreach ($student as $khoa3 => $gtri3) {
                                                     if ($value['student_id'] == $gtri3['id']) {
                                                         echo $gtri3['name'];
                                                     }
                                                 }
-                                                ?></th>
-                                            <th><?php echo $value['file_name']; ?></th>
-                                            <th><?php
+                                                ?></td>
+                                            <td>  <a href="<?php echo base_url() . 'exercise/download/' . str_replace("=", "", base64_encode($value['full_path'])); ?>"> <?php echo $value['file_name']; ?> </a>  </td>
+                                            <td><?php
                                                 foreach ($khoa as $khoa1 => $gtri1) {
                                                     if ($gtri1['id'] == $value['course_id']) {
                                                         echo $gtri1['name'];
                                                     }
                                                 }
-                                                ?></th>
-                                            <th><?php
+                                                ?></td>
+                                            <td><?php
                                                 foreach ($bai as $khoa2 => $gtri2) {
                                                     if ($value['learn_id'] == $gtri2['id']) {
                                                         echo $gtri2['name'];
                                                     }
                                                 }
-                                                ?></th>
-                                            <th><?php echo $value['note']; ?></th>
-                                            <th><button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#upload_file<?php echo $value['student_id']; ?>">
+                                                ?></td>
+                                            <td><?php echo $value['note']; ?></td>
+                                            <td><button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#upload_file<?php echo $value['id']; ?>">
                                                     Chữa bài
                                                 </button>
-                                                <div class="modal fade" id="upload_file<?php echo $value['student_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal fade" id="upload_file<?php echo $value['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -174,6 +213,13 @@
                                                                 <form class="form-horizontal" role="form" action="<?php echo base_url(); ?>exercise/action_upload" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
                                                                     <div class="gr5-row-2 margintop22" role="tabpanel">
                                                                         <div class="gr5-form">
+                                                                            <input type="text" class="hidden" name="note_repair" value="<?php 
+                                                                                                       foreach ($bai_chua as $khoa4 => $gtri4){
+                                                                                                           if($value['id'] == $gtri4['exe_id']){
+                                                                                                               echo $gtri4['note'];
+                                                                                                           }
+                                                                                                       }
+                                                                            ?>">
                                                                             <input type="text" class="hidden" name="student_id" value="<?php echo $value['student_id']; ?>">
                                                                             <input type="text" class="hidden" name="exe_id" value="<?php echo $value['id']; ?>">
                                                                             <div class="row gr5-row2-form2">
@@ -218,12 +264,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </th>
+                                            </td>
                                         </tr>
 <?php } ?>
                                 </tbody>
                             </table>
-                        </div>
+                        
 
 
 
@@ -247,7 +293,7 @@
 
                                 <div class="dataTables_paginate paging_bootstrap pull-right">
 
-<?php echo $paging ?>
+                                    <?php echo $paging ?>
 
                                 </div>								
 

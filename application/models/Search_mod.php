@@ -650,4 +650,76 @@ class Search_mod extends CI_Model
         return $row;
     }
 	
+    
+    function count_exercise($key_word, $status, $group_courses_id)
+    {
+        $this->db->from('exercise');
+        
+        if($key_word != 'empty')
+        {
+            $key_word = str_replace('-', ' ', $key_word);
+           
+            $this->db->where("`search` LIKE '%$key_word%'");
+        }
+
+        if($group_courses_id != 0)
+        {
+            $this->db->where('group_courses_id', $group_courses_id);
+        }
+
+        if($status != '' && $status != 2)
+        {
+            $this->db->where('status', $status);
+        }
+
+        return $this->db->count_all_results();
+    }
+    
+    
+    function exercise_count_courses($key_word, $courses_id)
+    {
+        $this->db->from('exercise');
+        
+        if($key_word != 'empty')
+        {
+            $key_word = str_replace('-', ' ', $key_word);
+           
+            $this->db->where("`search` LIKE '%$key_word%'");
+        }
+
+        if($courses_id != 0)
+        {
+            $this->db->where('course_id', $courses_id);
+        }
+
+        return $this->db->count_all_results();
+    }
+    
+    
+    function exercise_load_courses($key_word,  $courses_id, $limit, $offset)
+    {
+        if($key_word != 'empty')
+        {
+            $key_word = str_replace('-', ' ', $key_word);
+           
+            $this->db->where("`search` LIKE '%$key_word%'");
+        }
+
+        if($courses_id != 0)
+        {
+            $this->db->where('course_id', $courses_id);
+        }
+        
+        $this->db->order_by('id','DESC');
+
+        $this->db->limit($limit, $offset);
+
+        return $this->db->get('exercise')->result_array();
+    }
+    
+    
+    
+    
+    
+    
 }

@@ -18,8 +18,10 @@ class Lib_mod extends CI_Model {
             $this->db->select("$select");
         }
         if (isset($where) && !empty($where)) {
+           // print_r($where);die;
             foreach ($where as $key => $value) {
                 $this->db->where($key, $value);
+              //  echo $value;
             }
         }
         if (isset($limit) && !empty($limit)) {
@@ -564,4 +566,40 @@ class Lib_mod extends CI_Model {
         return $this->db->get("$table")->result_array();
     }
 
+    
+    function dung_cho_comment($table, $select, $where1, $where2, $limit, $offset, $order) {
+        if (isset($select) && !empty($select)) {
+            $this->db->select("$select");
+        }
+        if (isset($where1) && !empty($where1)) {
+           // print_r($where);die;
+            foreach ($where1 as $key1 => $value1) {
+                $this->db->where($key1, $value1);
+              //  echo $value;
+            }
+        }
+        if (isset($where2) && !empty($where2)) {
+           // print_r($where);die;
+            foreach ($where2 as $key2 => $value2) {
+                $this->db->where($key2, $value2);
+              //  echo $value;
+            }
+        }
+        if (isset($limit) && !empty($limit)) {
+            if (isset($offset) && !empty($offset)) {
+                $this->db->limit($limit, $offset);
+            } else {
+                $this->db->limit($limit);
+            }
+        }
+        if (isset($order) && !empty($order)) {
+            foreach ($order as $key => $value) {
+                $this->db->order_by($key, $value);
+            }
+        }
+        return $this->db->get("$table")->result_array();
+    }
+    
+    
+    
 }
