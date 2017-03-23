@@ -55,7 +55,6 @@ class Lichsugiaodich extends CI_Controller {
 
         $date1 = $this->input->post("date1");
         $date2 = $this->input->post("date2");
-
         if ($date2 > 0 && $date1 > 0) {
             if ($date2 == $date1) $date2 = $date1 + 86400;
             $data['date1']=$date1;

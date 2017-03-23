@@ -255,16 +255,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="rate">
-                    <a href="<?php echo base_url(); ?>comment">
-                        <i class="fa fa-comments"></i>
-                        <span class="title">
-                            Comments của học viên
-                        </span>
-                        <span class="selected">
-                        </span>
-                    </a>
-                </li>
+                
 <?php } ?>
 <?php if ($this->admin_id == 35 || $this->admin_id == 36 || $this->admin_id == 38) { ?>
                 <li class="rate">

@@ -90,34 +90,9 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                            <div class="btn-group">
-                                <strong>Hiện số bản ghi : </strong>
-                                <label for="">
-
-									<select size="1" class="per_page form-control input-small">
-
-				                        <?php $session_per_page = $this->session->userdata('session_per_page');
-
-				                        if(isset($session_per_page) && $session_per_page>0)
-
-				                            $per_page = $session_per_page;
-
-				                        else $per_page = 10; ?>
-
-				                        <option <?php if($per_page==10) echo 'selected="selected"'; ?> value="10">Hiện 10</option>
-
-				                        <option <?php if($per_page==20) echo 'selected="selected"'; ?> value="20">Hiện 20</option>
-
-				                        <option <?php if($per_page==30) echo 'selected="selected"'; ?> value="30">Hiện 30</option>
-
-				                        <option <?php if($per_page==50) echo 'selected="selected"'; ?> value="50">Hiện 50</option>
-
-				                    </select>
-
-								</label>
-                            </div>
+                           
                             <div class="btn-group pull-right">
-                                        <form action="<?php echo base_url(); ?>exercise/search" method="post">
+                                        <form action="<?php echo base_url(); ?>exercise/search" method="get">
 
 									<?php if('comenu'=='comenu'){ ?> 
 
@@ -130,7 +105,14 @@
                                         <?php } ?>
                                             </select>
                                                                         </label>
-                                            
+                                            <label>
+                                                <select size="1" class="form-control input-medium" name="status">
+                                                    <option value="2" <?php if( isset($status) && $status == '2' ){?>selected="selected" <?php } ?>>Tất cả</option>
+                                                    <option value="1" <?php if( isset($status) && $status == '1' ){?>selected="selected" <?php } ?>>Đã chữa </option>
+                                                    <option value="0" <?php if( isset($status) && $status == '0' ){?>selected="selected" <?php } ?>>Chưa chữa</option>
+                                                </select>
+                                            </label>
+                                        
 									 <?php } ?>
                                             
                                             <label class="hidden"><input type="text" name="key_word" <?php if (isset($key_word) && $key_word != 'empty') { ?> value="<?php echo $key_word; ?>" <?php } else { ?> placeholder="Từ khóa tìm kiếm" <?php } ?> class="form-control input-medium input-inline"></label>
@@ -165,6 +147,7 @@
                                         <th>Khóa học</th>
                                         <th>Bài học</th>
                                         <th>Ghi chú</th>
+                                        <th>Đã chữa</th>
                                         <th>Chữa bài</th>
 
                                     </tr>
@@ -198,7 +181,10 @@
                                                     }
                                                 }
                                                 ?></td>
-                                            <td><?php echo $value['note']; ?></td>
+                                            <td><p class="snote"><?php echo $value['note']; ?></p></td>
+                                            
+                                            <td><?php foreach ($bai_chua as $khoa6 => $gtri6){ if($value['id'] == $gtri6['exe_id']){ echo '<a class="txt-center btn btn-sm green filter-cancel"><i class="fa fa-check"></i></a>';}} ?></td>
+                                            
                                             <td><button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#upload_file<?php echo $value['id']; ?>">
                                                     Chữa bài
                                                 </button>

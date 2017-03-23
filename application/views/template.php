@@ -25,6 +25,16 @@
             <link rel="shortcut icon" href="<?php echo WEBSITE . $this->session->userdata('favicon'); ?>"/>
         <?php } ?>
         <style>.my-border{border: 1px solid #cecece;} .w100{width: 100%!important;} .fileinput-preview img{width: 100%!important;}</style>
+        <style>
+            .snote{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 171px;
+            }
+        </style>
+        
+        
     </head>
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
