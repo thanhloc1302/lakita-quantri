@@ -118,6 +118,16 @@
                         </span>
                     </a>
                 </li>
+                <li class="banner">
+                    <a href="<?php echo base_url(); ?>BaoCaoVanHanhHocVien">
+                        <i class="fa fa-users"></i>
+                        <span class="title">
+                            Báo cáo vận hành học viên
+                        </span>
+                        <span class="selected">
+                        </span>
+                    </a>
+                </li>
                 <li class="rate">
                     <a href="<?php echo base_url(); ?>purchase/userVoucher">
                         <i class="fa fa-comments"></i>

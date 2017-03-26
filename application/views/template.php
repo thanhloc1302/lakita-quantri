@@ -27,9 +27,7 @@
         <style>.my-border{border: 1px solid #cecece;} .w100{width: 100%!important;} .fileinput-preview img{width: 100%!important;}</style>
         <style>
             .snote{
-                overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap;
                 width: 171px;
             }
         </style>
@@ -44,8 +42,10 @@
 
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
-
+<?php  $controller = $this->uri->rsegment(1); 
+if($controller != 'exercise') { ?>
             <?php $this->load->view('common/sidebar'); ?>
+<?php }?>
 
             <?php if (isset($content)) $this->load->view($content); ?>
 
