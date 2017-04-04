@@ -1,20 +1,6 @@
 <script type="text/javascript">
 
-    function delete_items()
 
-    {
-
-        var result = confirm('Bạn chắc chắn muốn xoá các bản ghi đã chọn?');
-
-        if (result == false) {
-
-            return false;
-
-        }
-
-        $('form#form-del').submit();
-
-    }
 
 </script>
 
@@ -155,7 +141,15 @@
                                 <tbody>
                                     
                                     <?php 
-                                    foreach ($rows as $key => $value) { ?>
+                                    foreach ($rows as $key => $value) { 
+                                        
+                                        $learn = $this->lib_mod->detail('learn', array('id'=>$value['learn_id']));
+                                        $learn_slug = "http://lakita.vn/".$learn[0]['slug'].'-4'.$learn[0]['id'].'.html';
+                    
+                                        $course = $this->lib_mod->detail('courses', array('id'=>$value['course_id']));
+                                        $course_slug = "http://lakita.vn/".$course[0]['slug'].'-2'.$course[0]['id'].'.html';
+                                        
+                                        ?>
                                         <tr>
                                             <td><?php echo $value['id']; ?></td>
                                             <td><?php echo date('H:i:s d/m/Y', $value['time']); ?></td>
@@ -170,14 +164,14 @@
                                             <td><?php
                                                 foreach ($khoa as $khoa1 => $gtri1) {
                                                     if ($gtri1['id'] == $value['course_id']) {
-                                                        echo $gtri1['name'];
+                                                        echo "<a href='". $course_slug ."'>". $gtri1['name']." </a>" ;
                                                     }
                                                 }
                                                 ?></td>
                                             <td><?php
                                                 foreach ($bai as $khoa2 => $gtri2) {
                                                     if ($value['learn_id'] == $gtri2['id']) {
-                                                        echo $gtri2['name'];
+                                                        echo "<a href='". $learn_slug ."'>". $gtri2['name']." </a>" ;
                                                     }
                                                 }
                                                 ?></td>

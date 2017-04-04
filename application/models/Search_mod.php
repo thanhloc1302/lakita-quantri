@@ -451,8 +451,9 @@ class Search_mod extends CI_Model
         if($key_word != 'empty')
         {
             $key_word = str_replace('-', ' ', $key_word);
-           
-            $this->db->where("`search` LIKE '%$key_word%'");
+            
+            $this->db->like('search', $key_word); 
+            //$this->db->where("`search` LIKE '%$key_word%'");
         }
 
         if($courses_id != 0)
@@ -474,7 +475,8 @@ class Search_mod extends CI_Model
         {
             $key_word = str_replace('-', ' ', $key_word);
            
-            $this->db->where("`search` LIKE '%$key_word%'");
+            //$this->db->where("`search` LIKE '%$key_word%'");
+            $this->db->like('search', $key_word); 
         }
 
         if($status != '' && $status != 2)

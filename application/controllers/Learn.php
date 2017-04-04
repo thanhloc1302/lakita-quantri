@@ -305,26 +305,30 @@ class learn extends CI_Controller {
         $this->load->model('search_mod', 'search_mod');
 
         $result = $this->uri->segment_array();
-
         if (!isset($result[4]) || !isset($result[6]) || !isset($result[8])) {
             redirect('learn/index');
         } else {
             $data['key_word'] = $key_word = $result[4];
             $data['status'] = $status = $result[6];
             $data['courses_id'] = $courses_id = $menu_parent = $menu_id = $result[8];
-
-            if ($courses_id != '0') {
-                $cate_label = substr($courses_id, 0, 1);
-                $cate_id = str_replace($cate_label, '', $courses_id);
-
-                if ($cate_label == 'p') {
-                    $menu_parent = $data['pid'] = $cate_id;
-                    $menu_id = 0;
-                } else {
-                    $menu_parent = 0;
-                    $menu_id = $data['cid'] = $cate_id;
-                }
-            }
+            
+            
+            
+//            if ($courses_id != '0') {
+//                var_dump($courses_id);
+//                $cate_label = substr($courses_id, 0, 1);
+//                var_dump($cate_label);
+//                die;
+//                $cate_id = str_replace($cate_label, '', $courses_id);
+//
+//                if ($cate_label == 'p') {
+//                    $menu_parent = $data['pid'] = $cate_id;
+//                    $menu_id = 0;
+//                } else {
+//                    $menu_parent = 0;
+//                    $menu_id = $data['cid'] = $cate_id;
+//                }
+//            }
 
             $this->load->library('pagination');
             $per_page = 10;
@@ -337,9 +341,14 @@ class learn extends CI_Controller {
             } else {
                 $offset = $this->uri->segment(9);
             }
-            $total = $this->search_mod->count_learn($key_word, $status, $menu_id, $menu_parent);
-            $data['rows'] = $this->search_mod->load_learn($key_word, $status, $menu_id, $menu_parent, $per_page, $offset);
+            $total = $this->search_mod->count_learn($key_word, $status, $courses_id);
 
+            
+            $data['rows'] = $this->search_mod->load_learn($key_word, $status, $courses_id, $per_page, $offset);
+         
+           
+        
+            
             $base_url = site_url('learn/result_search/key_word/' . $key_word . '/status/' . $status . '/courses_id/' . $courses_id . '/');
             $config['base_url'] = $base_url;
             $config['per_page'] = $per_page;

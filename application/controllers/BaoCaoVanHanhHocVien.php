@@ -13,6 +13,17 @@ class BaoCaoVanHanhHocVien extends CI_Controller {
         if (empty($admin))
             redirect('home/login');
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         $data['content'] = 'BaoCaoVanHanhHocVien/index';
         $data['header'] = 'dash_header';
         $data['footer'] = 'dash_footer';
