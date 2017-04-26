@@ -34,7 +34,7 @@ class GenerateCod extends CI_Controller {
         }
         $prefix = array(37 => 'E100', 41 => 'E200', 16 => 'E300', 10 => 'E110', 65 => 'TC100', 
             66 => 'KT100', 67=> 'E400', 68=>'KT200', 69=>'E130', 71=>'KT300', 72 => 'KT500', 
-            73=> 'KT400', 74=> 'KT600','combo'=>'CB100');
+            73=> 'KT400', 74=> 'KT600', 75 => 'EM100', 77 => 'KT800', 'combo'=>'CB100');
         $methodID = array('cod' => 1, 'bank' => 2, 'direct' => 3);
         $courseID = $this->input->post('courseID');
         $method = $this->input->post('method');

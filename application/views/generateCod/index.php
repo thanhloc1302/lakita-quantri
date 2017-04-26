@@ -76,7 +76,9 @@
                                                              '71',  //báo cáo tài chính elink
                                                              '72', //xác định chi phí elink
                                                              '73', //xác định chi phí NhungPT
-                                                    '74'
+                                                    '74',
+                                                    '75',//EM100
+                                                    '77', //KT800
                                                         ])) {
                                                     ?>
 
