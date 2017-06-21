@@ -16,13 +16,14 @@ class GenerateCod extends CI_Controller {
             echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
+        
         $data['checkCod'] = 0;
         $data['generated'] = 0;
-        $data['courses'] = $this->lib_mod->load_all('courses', 'name, id', array(), '', '', '');
+        //$data['courses'] = $this->lib_mod->load_all('courses', 'name, id', array('status' => 1), '', '', '');
         $data['header'] = 'list_base_header';
         $data['footer'] = 'list_base_footer';
         $data['content'] = 'generateCod/index';
-        // $data['courses'] = $this->lib_mod->load_all('courses', 'id, name', array('status'=>1), '', '', array('sort'=>'desc'));
+         $data['courses'] = $this->lib_mod->load_all('courses', 'id, name', array('status'=>1), '', '', array('sort'=>'desc'));
         $this->load->view('template', $data);
     }
 
@@ -32,34 +33,40 @@ class GenerateCod extends CI_Controller {
             echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
+        $prefix = array(37 => 'E100', 41 => 'E200', 16 => 'E300', 10 => 'E110', 65 => 'TC100', 
+            66 => 'KT100', 67=> 'E400', 68=>'KT200', 69=>'E130', 71=>'KT300', 72 => 'KT500', 
+            73=> 'KT400', 74=> 'KT600', 75 => 'EM100', 77 => 'KT800',78 => 'KT210' ,'combo'=>'CB100');
         $methodID = array('cod' => 1, 'bank' => 2, 'direct' => 3);
         $courseID = $this->input->post('courseID');
-        $prefix = $this->_find_course_code($courseID);
         $method = $this->input->post('method');
         $number = $this->input->post('number');
         $reason = $this->input->post('reason');
-        $trial_learn = $this->input->post('trial_learn');
+        $trial_learn =  $this->input->post('trial_learn'); 
         $this->load->library('generate');
         for ($i = 0; $i < intval($number); $i++) {
             // $randStr = sha1(rand() . time());
             // $randStr = substr($randStr, rand(0, 30), 7);
             $search_array = array('first' => 1, 'second' => 4);
-            $randStr = $prefix . $this->generate->generateRandomString(5, TRUE);
+            if(array_key_exists($courseID, $prefix)){
+            $randStr = $prefix[$courseID] . $this->generate->generateRandomString(5,TRUE);
+            }
+            else{
+                 $randStr = 'KHC' . $this->generate->generateRandomString(5,TRUE);
+            }
             while (count($this->lib_mod->load_all('cod_course', '', array('cod' => $randStr), '', '', '')) > 0) {
-                $randStr = $prefix . $this->generate->generateRandomString(5, TRUE);
+                $randStr = $prefix[$courseID] . $this->generate->generateRandomString(5,TRUE);
             }
             $param['cod'] = $randStr;
-            $param['course_id'] = ($courseID == 'combo') ? 67 : $courseID;
+            $param['course_id'] = ($courseID=='combo')?67:$courseID;
             $param['status'] = 0;
             $param['method'] = $methodID[$method];
             $param['admin_id'] = $this->admin_id;
             $param['trial_learn'] = $trial_learn;
             $param['time'] = time();
-            if ($courseID == 'combo')
-                $param['combo_course_id'] = 65;
+            if($courseID=='combo') $param['combo_course_id']=65;
             $this->db->insert('cod_course', $param);
-            $action = 'Sinh mã cod "' . $randStr . '". Lý do: ' . $reason;
-            $this->lib_mod->insert_log($action);
+            $action = 'Sinh mã cod "' . $randStr . '". Lý do: '. $reason;
+                    $this->lib_mod->insert_log($action);
             $codInserted[] = $randStr;
         }
         $data['checkCod'] = 0;
@@ -70,16 +77,6 @@ class GenerateCod extends CI_Controller {
         $data['content'] = 'generateCod/index';
         // $data['courses'] = $this->lib_mod->load_all('courses', 'id, name', array('status'=>1), '', '', array('sort'=>'desc'));
         $this->load->view('template', $data);
-    }
-
-    private function _find_course_code($cod) {
-        if ($cod == 'combo')
-            return 'CB100';
-        $course_cod = $this->lib_mod->load_all('courses', '', array("id" => $cod), '', '', '');
-        if (!empty($course_cod))
-            return $course_cod[0]['course_code'];
-        else
-            return 'L999';
     }
 
     function checkCod() {
@@ -107,7 +104,7 @@ class GenerateCod extends CI_Controller {
                 $courseDetail = $this->lib_mod->load_all('courses', '', array('id' => $codDetail[0]['courses_id']), '', '', '');
                 $data['codStt'] = 'actived';
                 $data['activedDetail'] = array('studentEmail' => $studentDetail[0]['email'], 'time' => $codDetail[0]['create_date'], 'courseName' => $courseDetail[0]['name']);
-                $data['trial_learn'] = $detail[0]['trial_learn'];
+                 $data['trial_learn'] = $detail[0]['trial_learn'];
             }
         }
         $data['cod'] = $cod;
