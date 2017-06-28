@@ -175,8 +175,6 @@ if($controller != 'exercise') { ?>
 
             });
         </script> 
-        <input type="hidden" value="<?php echo base_url(); ?>" id="base_url"/>
-
     </body>
     <!-- END BODY -->
 </html>

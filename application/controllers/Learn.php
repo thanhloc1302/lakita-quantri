@@ -58,7 +58,8 @@ class learn extends CI_Controller {
             echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "'.base_url().'"</script>';
             exit;
         }
-
+        
+        
         $big_size = '268x150';
         $arr_big_size = explode('x', $big_size);
         $targ_w = intval($arr_big_size[0]);
@@ -79,7 +80,9 @@ class learn extends CI_Controller {
             if (!empty($att_description)) {
                 $attach_desc = implode('@', $att_description);
             }
-
+        
+            
+    
             $name = trim($this->input->post('name'));
             $title = trim($this->input->post('title'));
             $thumbnail = trim($this->input->post('thumbnail'));
@@ -92,6 +95,10 @@ class learn extends CI_Controller {
             $youtube = $this->input->post('youtube');
             $youtube = end(explode('?v=', $youtube));
             $trial_learn = ( $this->input->post('trial_learn') != '' )? 1 :0;
+            
+            $video_link = trim($this->input->post('video_link'));
+            $video = strstr( $video_link, 'data');
+            
             $data = array(
                 'name' => $name,
                 'youtube' => $youtube,
@@ -101,7 +108,7 @@ class learn extends CI_Controller {
                 'meta_keywords' => $meta_keywords,
                 'tag' => $tag,
                 'create_date' => time(),
-                'video_file' => trim($this->input->post('video_file')),
+                'video_file' => $video,
                 'courses_id' => trim($this->input->post('courses_id')),
                 'chapter_id' => $chapter_id,
                 'slug' => trim($this->input->post('slug')),

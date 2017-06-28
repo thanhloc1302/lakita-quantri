@@ -304,39 +304,9 @@
                                 <div class="form-group">
                                     <label for="inputEmail12" class="control-label pull-left"><i>Nhúng youtube</i></label>
                                     <input class="form-control" name="youtube" value="<?php if (isset($row[0])) echo $row[0]['youtube']; ?>" type="text"/>
-                                </div> 
+                                </div>                               
 
-                                <!--  <div class="form-group">
-                                    <label for="inputPassword1" class="control-label"><i>Ảnh đại diện</i></label>
-                                    <div class="fileinput fileinput-new w100" data-provides="fileinput">
-                                        <div class="fileinput-new image">
-                                            <img class="w100" src="<?php
-                                if (isset($row[0]) && !empty($row[0]['image']))
-                                    echo WEBSITE . $row[0]['image'];
-                                else
-                                    echo base_url() . 'styles/assets/img/no-image.png';
-                                ?>" alt=""/>
-                                        </div>
-                                        <div class="fileinput-preview fileinput-exists image w100">
-                                        </div>
-                                        <div>
-                                            <span class="btn default btn-file w100">
-                                                <span class="fileinput-new">
-                                                    Chọn ảnh
-                                                </span>
-                                                <span class="fileinput-exists yellow">
-                                                    Sửa ảnh
-                                                </span>
-                                                <input type="file" name="image">
-                                            </span>
-                                            <a href="#" class="btn red fileinput-exists w100" data-dismiss="fileinput">
-                                                Xóa ảnh
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div> -->                                
-
-                                <div class="form-group">                                    
+                                <div class="form-group">     
                                     <label for="inputPassword1" class="control-label"><i>Upload video</i></label>
                                     <input type="hidden" id="website" value="<?php echo WEBSITE; ?>">
                                     <input type="hidden" id="token" value="<?php echo md5('AceTienDung' . time()); ?>">
@@ -344,19 +314,23 @@
                                     <div class="form-group col-md-12" style="padding:0">
                                         <div id="playvideo">
                                             <?php if (isset($row[0]) && !empty($row[0]['video_file'])) { ?>
-                                                <video width="100%" controls>
+                                                <video id="pre_video" width="100%" controls>
                                                     <source src="<?php echo WEBSITE . $row[0]['video_file']; ?>" type="video/mp4">
                                                     Trình duyệt này không hỗ trợ chạy video
                                                 </video>
                                             <?php } else { ?>
-                                                <img class="w100" src="<?php echo base_url() . 'styles/assets/img/no-image.png'; ?>" alt=""/>                                    
+                                                <img id="pre_video" class="w100" src="<?php echo base_url() . 'styles/assets/img/no-image.png'; ?>" alt=""/>                                    
                                             <?php } ?>
                                         </div>                                        
-                                        <div style="position:relative;" class="w100">
+<!--                                        <div style="position:relative;" class="w100">
                                             <div style="position:absolute;" class="w100">
                                                 <input id="file_upload" name="file_upload" type="file" multiple="true">
                                             </div>                                   
-                                        </div>    
+                                        </div>    -->
+<!--                                        <a class="btn default btn-file w100 iframe-btn" id="attack_link" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=attack_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> select files</a>-->
+
+<input hidden="hidden" name="video_link" type="text" id="video_link" value="<?php if (isset($row[0]) && !empty($row[0]['video_file'])) echo $row[0]['video_file']; ?>">
+                                    <a class="btn default btn-file w100 iframe-btn" id="select_image" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=video_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> Chọn video</a>                                       
                                     </div>                                                                
                                 </div>
 
@@ -385,7 +359,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <a class="btn default btn-file w100 iframe-btn" id="select_image" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=image_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> Chọn ảnh</a>
+                                        <a class="btn default btn-file w100 iframe-btn" id="select_image" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=image_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> Chọn ảnh</a>                                       
                                         <a href="jqvascript:void(0);" id="remove_image" style="display:none;" class="btn red fileinput-exists w100" data-dismiss="fileinput">
                                             <i class="fa fa-trash-o"></i> Xóa ảnh
                                         </a>
@@ -430,6 +404,9 @@
     </div>
 </div>
 <!-- END CONTENT -->
+<script src="<?php echo base_url(); ?>/styles/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+
+
 <script>
     function ChangeToSlug()
     {
@@ -464,5 +441,18 @@
         slug = slug.replace(/\@\-|\-\@|\@/gi, '');
         //In slug ra textbox có id “slug”
         document.getElementById('slug').value = slug;
-    }
+    };
+
+$( document ).ready(function() {
+    var curr = $("#video_link").val();
+    setInterval(function(){
+        if($("#video_link").val() != curr){
+            curr = $("#video_link").val();
+            $('#pre_video').remove();
+            $("#playvideo").prepend("<video id='pre_video' width='100%' controls><source src='"+curr+"' type='video/mp4'></video>"); 
+        }
+    },1000);
+});
+  
+    
 </script>
