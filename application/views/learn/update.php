@@ -315,7 +315,7 @@
                                         <div id="playvideo">
                                             <?php if (isset($row[0]) && !empty($row[0]['video_file'])) { ?>
                                                 <video id="pre_video" width="100%" controls>
-                                                    <source src="<?php echo WEBSITE . $row[0]['video_file']; ?>" type="video/mp4">
+                                                    <source src="http://localhost:8888/lakita_quan_tri_muon_khoc/lakita_quantri/data/source/loc/02.mp4" type="video/mp4">
                                                     Trình duyệt này không hỗ trợ chạy video
                                                 </video>
                                             <?php } else { ?>
@@ -329,7 +329,7 @@
                                         </div>    -->
 <!--                                        <a class="btn default btn-file w100 iframe-btn" id="attack_link" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=attack_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> select files</a>-->
 
-<input hidden="hidden" name="video_link" type="text" id="video_link" value="<?php if (isset($row[0]) && !empty($row[0]['video_file'])) echo $row[0]['video_file']; ?>">
+                                    <input name="video_link" type="text" id="video_link" value="<?php if (isset($row[0]) && !empty($row[0]['video_file'])) echo $row[0]['video_file']; ?>">
                                     <a class="btn default btn-file w100 iframe-btn" id="select_image" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=video_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> Chọn video</a>                                       
                                     </div>                                                                
                                 </div>
@@ -448,11 +448,16 @@ $( document ).ready(function() {
     setInterval(function(){
         if($("#video_link").val() != curr){
             curr = $("#video_link").val();
+            
             $('#pre_video').remove();
-            $("#playvideo").prepend("<video id='pre_video' width='100%' controls><source src='"+curr+"' type='video/mp4'></video>"); 
+            $('#playvideo').prepend("<video id='pre_video' width='100%' controls><source src='"+curr+"' type='video/mp4'></video>"); 
+            
+    var vid = document.getElementById("pre_video");
+    alert(vid.duration);
         }
     },1000);
 });
-  
+  var vid = document.getElementById("pre_video");
+    alert(vid.duration);
     
 </script>
