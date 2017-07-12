@@ -186,7 +186,17 @@
 .direct{
     display: none;
 }
+.combo{
+    display: none;
+}
 .active1{
         border-bottom: 3px solid red;
 }
+
+.row-fluid2{
+    padding: 10px 20px;
+    margin-left: 55px;
+    margin-bottom: 10px;
+}
+
 

@@ -71,16 +71,40 @@ if($controller != 'exercise') { ?>
             jQuery(function () {
                 $(".directtab").click(function () {
                     $(".bank").hide();
-                     $(".banktab").removeClass("active1");
+                    $(".banktab").removeClass("active1");
                     $(".direct").show();
                     $(".directtab").addClass("active1");
+                    $(".combo").hide();
+                    $(".combotab").removeClass("active1");
                 });
                 $(".banktab").click(function () {
                     $(".bank").show();
                     $(".banktab").addClass("active1");
                     $(".direct").hide();
-                     $(".directtab").removeClass("active1");
+                    $(".directtab").removeClass("active1");
+                    $(".combo").hide();
+                    $(".combotab").removeClass("active1");
                 });
+                $(".combotab").click(function () {
+                    $(".bank").hide();
+                    $(".banktab").removeClass("active1");     
+                    $(".direct").hide();
+                    $(".directtab").removeClass("active1");
+                    $(".combo").show();
+                    $(".combotab").addClass("active1");
+                    
+                });
+                
+                var a = '';
+                $('.khoa_hoc').click( function () {
+                var b = $(this).val();
+                a = b +','+ a;
+                if(a.slice(a.length -1, a.length) == ','){
+                a = a.slice(0, a.length - 1);}
+                $('.khoahocdachon').val(a);
+                });
+                
+                
                 $("#datepicker").hover(function () {
                     $("#datepicker").datepicker();
                 });
