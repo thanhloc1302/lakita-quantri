@@ -95,15 +95,7 @@ if($controller != 'exercise') { ?>
                     
                 });
                 
-                var a = '';
-                $('.khoa_hoc').click( function () {
-                var b = $(this).val();
-                a = b +','+ a;
-                if(a.slice(a.length -1, a.length) == ','){
-                a = a.slice(0, a.length - 1);}
-                $('.khoahocdachon').val(a);
-                });
-                
+
                 
                 $("#datepicker").hover(function () {
                     $("#datepicker").datepicker();

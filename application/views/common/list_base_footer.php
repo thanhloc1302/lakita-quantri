@@ -22,6 +22,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<?php echo base_url();?>styles/assets/scripts/core/app.js"></script>
 <script src="<?php echo base_url();?>styles/assets/scripts/custom/table-managed.js"></script>
+<script src="<?php echo base_url();?>styles/assets/scripts/custom/bootstrap-select.min.js" type="text/javascript"></script>
 <!--<script>
 jQuery(document).ready(function() {       
    App.init();

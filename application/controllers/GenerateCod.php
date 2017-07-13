@@ -158,7 +158,8 @@ class GenerateCod extends CI_Controller {
             echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
-        $coursecombo = $this->input->post('khoahocdachon');
+        $coursecombo = $this->input->post('courseIDcb');
+        $coursecombo = implode(',', $coursecombo);
         $coursecombo_id = substr($coursecombo, 3, strlen($coursecombo));
         $coursecombo_arr = explode(',', $coursecombo);
         $num_course = count($coursecombo_arr);
