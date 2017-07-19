@@ -67,7 +67,7 @@ if($controller != 'exercise') { ?>
         <?php $this->load->view('common/' . $footer); ?>
 
         <script type="text/javascript">
-            //............ AJAX ............//
+            /*............ AJAX ............*/
             jQuery(function () {
                 $(".directtab").click(function () {
                     $(".bank").hide();
@@ -103,9 +103,6 @@ if($controller != 'exercise') { ?>
 
                 $("#datepicker").change(function () {
                     var selectDate = ($(this).datepicker("getDate").getTime()) / 1000;
-//                    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-//                    d.setUTCSeconds(selectDate);
-//                    console.log(d.toString());
                     $("#date1").val(selectDate);
                 });
                 $("#datepicker2").hover(function () {
@@ -113,10 +110,6 @@ if($controller != 'exercise') { ?>
                 });
                 $("#datepicker2").change(function () {
                     var selectDate = ($(this).datepicker("getDate").getTime()) / 1000;
-
-//                    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-//                    d.setUTCSeconds(selectDate);
-//                    console.log(d.toString());
                     $("#date2").val(selectDate);
                 });
 

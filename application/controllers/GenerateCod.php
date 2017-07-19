@@ -23,7 +23,7 @@ class GenerateCod extends CI_Controller {
         $data['header'] = 'list_base_header';
         $data['footer'] = 'list_base_footer';
         $data['content'] = 'generateCod/index';
-        $data['courses'] = $this->lib_mod->load_all('courses', 'id, name', array('status' => 1), '', '', array('sort' => 'desc'));
+        $data['courses'] = $this->lib_mod->load_all('courses', '', array('status' => 1), '', '', array('sort' => 'desc'));
         $this->load->view('template', $data);
     }
 

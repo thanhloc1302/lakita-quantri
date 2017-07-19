@@ -65,7 +65,7 @@
                                             <?php
                                             foreach ($courses as $key => $cour) {
                                                 ?>
-                                                <option value="<?php echo $cour['id']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $cour['name']; ?></option>
+                                                <option value="<?php echo $cour['id']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $cour['course_code'].' - '.$cour['name']; ?></option>
                                                 <?php
                                             }
                                             ?>
@@ -158,11 +158,11 @@
                         <div class="row-fluid2" style="padding-right: 42px;">
                             <div class="span12">
                                 <div class="input-icon">
-                                    <select class="form-control selectpicker" name="courseIDcb[]" id="courseID" multiple>
+                                    <select class="form-control selectpicker" name="courseIDcb[]" id="courseID" multiple title="Chọn khóa học">
                                         <?php
                                         foreach ($courses as $key => $cour) {
                                             ?>
-                                        <option style="width: 500px" value="<?php echo $cour['id']; ?>"><?php echo $cour['id'].' '.$cour['name']; ?></option>
+                                        <option style="width: 500px" value="<?php echo $cour['id']; ?>"><?php echo $cour['course_code'].' - '.$cour['name']; ?></option>
                                             <?php
                                         }
                                         ?>

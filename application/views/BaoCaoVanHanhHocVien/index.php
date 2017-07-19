@@ -1,409 +1,164 @@
 <!-- bây giờ viết trên local thì 2 file css và js để tạm như link dưới, lúc nào up lên thì chỉnh lại sau -->
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>styles/assets/css/datepicker.css" />
-<script type="text/javascript" src="<?php echo base_url(); ?>styles/assets/scripts/custom/bootstrap-datepicker.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>styles/assets/plugins/bootstrap/css/bootstrap.min.css"  />-->
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>styles/assest/plugins/bootstrap-datepicker/css/datepicker.css" />
+
+<!--<script type="text/javascript" src="<?php echo base_url(); ?>styles/assets/plugins/jquery-1.10.2.min.js"></script>-->
+<!--<script type="text/javascript" src="<?php echo base_url(); ?>styles/assets/plugins/bootstrap/js/bootstrap.min.js"></script>-->
+<!--<script type="text/javascript" src="<?php echo base_url(); ?>styles/assest/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>-->
+
+
+<style>
+    .sticky1 {
+        position: fixed;
+        top: 27px;
+    }
+    .header1 {
+        width: 100%;
+        padding: 15px 0;
+    }
+</style>
+
+
+<div class="page-content-wrapper">
+    <div class="page-content" style="height: 1100px"> 
+        <div >
+            <div class="col-lg-12">
+
+                
+
+                
 
 
 
-        <div class="page-content-wrapper">
-            <div class="page-content" style="background-color: #3D3D3D"> 
-			<div >
-                <div class="col-lg-12">
+                <table class="table table-striped table-bordered table-hover"  >
+                    <thead>
+                    <th>
+                        ten hoc vien
+                    </th>
+                    <th>
+                        sdt
+                    </th>
+                    <th>
+                        email
+                    </th>
+                    <th>
+                        đã kích hoạt
+                    </th>
+                    <th>
+                        đã xem video
+                    </th>
+                    <th>
+                        đã comment
+                    </th>
+                    <th>
+                        đã nộp bài
+                    </th>
+                    </thead>
+                    <tbody>
+                            <?php
+                            foreach ($locnt as $k_locnt => $v_locnt) {
+                                ?>
+                        <tr>
+                            <td>
+                                <?php echo $v_locnt['name'] ?>
+                            </td>
+                            <td>
+                                <?php echo $v_locnt['sdt'] ?>
+                            </td>
+                            <td>
+                                <?php echo $v_locnt['email'] ?>
+                            </td>
+                            <td>
+                            <?php
+                                foreach ($student as $k_student => $v_student){
+                                    if($v_locnt['email'] == $v_student['email']){
+                                        foreach ($student_courses as $k_student_courses => $v_student_courses){
+                                            if($v_student_courses['student_id'] == $v_student['id']){
+                                                echo 'x';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td>
+                            <?php
+                                foreach ($student as $k_student => $v_student){
+                                    if($v_locnt['email'] == $v_student['email']){
+                                        foreach ($student_learn as $k_student_learn => $v_student_learn){
+                                            if($v_student_learn['student_id'] == $v_student['id']){
+                                                echo 'x';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td>
+                            <?php
+                                foreach ($student as $k_student => $v_student){
+                                    if($v_locnt['email'] == $v_student['email']){
+                                        foreach ($comment as $k_comment => $v_comment){
+                                            if($v_comment['student_id'] == $v_student['id']){
+                                                echo 'x';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td>
+                            <?php
+                                foreach ($student as $k_student => $v_student){
+                                    if($v_locnt['email'] == $v_student['email']){
+                                        foreach ($exercise as $k_exercise => $v_exercise){
+                                            if($v_exercise['student_id'] == $v_student['id']){
+                                                echo 'x';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                                <?php
+                            }
+                            ?>
+                    </tbody>
+                </table>
 
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label"><strong>Từ ngày : </strong></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control datepicker" name="start_date" id='dp1' data-date-format="dd-mm-yyyy" placeholder="">
-                            </div>
-                            
-                            
-                            
-                            
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label"><strong>Đến ngày : </strong></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="end_date" id='dp2' data-date-format="dd-mm-yyyy" placeholder="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Lọc</button>
-                            </div>
-                        </div>
-                    </form>
-                    <div id="header">
-                        Giữ nguyên Header khi cuộn trang theo phong cách Facebook bằng jQuery
-                        </div>
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead style="background-color: green; color: #FFF;">
-                            <th style="width: 550px;">
-                                TÍNH TỔNG TẤT CẢ KHÓA HỌC TỪ ĐẦU TỚI THỜI ĐIỂM HIỆN TẠI
-                            </th>
-                            <th>
-                                Excel (ĐV :số đơn)
-                            </th>
-                            <th>
-                                Kế toán (ĐV :số đơn)
-                            </th>
-                            <th>
-                                Tổng
-                            </th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Tổng số đơn giao hàng
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số KH kích hoạt ngay sau khi nhận COD
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số Kh đã kích hoạt đến ngày
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số Kh học ít nhất 1 video
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số Kh học ít nhất 10 video
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số Kh học toàn bộ video
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số khách hàng nhận hỗ trợ comment (comment + đã trả lời)
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số khách hàng nhận hỗ trợ comment (comment + chưa trả lời)
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số khách hàng viết cảm nhận
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số khách hàng đánh 5 sao khóa học
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số khách hàng đánh 4 sao khóa học
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số khách hàng đánh 3 sao khóa học
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số khách hàng đánh 2 sao khóa học
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số khách hàng đánh 1 sao khóa học
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số KH mua >=2 khóa
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tổng số KH mua 1 khóa
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    
-                    <table class="table table-striped table-bordered table-hover"> 
-                        <thead style="background-color: green; color: #FFF">
-                            <th style="width: 550px;">
-                                Các tỷ lệ
-                            </th>
-                            <th>
-                                Excel (ĐV :số đơn)
-                            </th>
-                            <th>
-                                Kế toán (ĐV :số đơn)
-                            </th>
-                            <th>
-                                Tổng
-                            </th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Tỉ lệ kích hoạt/ Số lượng COD phát ra
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Số học viên comment được hỗ trợ/ Số học viên học
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Số học viên comment chưa được hỗ trợ/ Số học viên học
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Số học viên học/ Tổng số học viên
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tỉ lệ học tiếp
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Số học viên viết cảm nhận /Tổng số học viên
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Số khách đánh giá/ Tổng số học viên
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                        </tbody>  
-                    </table>
-                    
-                    
-                    
-                </div>
+
+
+               
+
+
             </div>
-			</div>
         </div>
+    </div>
+</div>
 
+<script>
 
+    var header = document.querySelector('.header1');
+    var origOffsetY = header.offsetTop;
 
+    function onScroll(e) {
+        window.scrollY >= origOffsetY ? header.classList.add('sticky1') :
+                header.classList.remove('sticky1');
+    }
 
+    document.addEventListener('scroll', onScroll);
 
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#dp1').datepicker();
+    });
+    $(function () {
+        $('#dp2').datepicker();
+    });
+    $(function () {
+        $('#datepicker2').datepicker();
+    });
+</script>
