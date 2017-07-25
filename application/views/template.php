@@ -65,7 +65,7 @@ if($controller != 'exercise') { ?>
         <!-- END FOOTER -->
 
         <?php $this->load->view('common/' . $footer); ?>
-
+        <input type="hidden" id="base_url" value="<?php echo base_url() ?>">
         <script type="text/javascript">
             /*............ AJAX ............*/
             jQuery(function () {

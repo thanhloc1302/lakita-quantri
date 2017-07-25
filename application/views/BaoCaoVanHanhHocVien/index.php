@@ -32,94 +32,34 @@
 
                 <table class="table table-striped table-bordered table-hover"  >
                     <thead>
+                        
                     <th>
                         ten hoc vien
-                    </th>
-                    <th>
-                        sdt
                     </th>
                     <th>
                         email
                     </th>
                     <th>
-                        đã kích hoạt
+                        sdt
                     </th>
-                    <th>
-                        đã xem video
-                    </th>
-                    <th>
-                        đã comment
-                    </th>
-                    <th>
-                        đã nộp bài
-                    </th>
+                    
+            
                     </thead>
                     <tbody>
                             <?php
-                            foreach ($locnt as $k_locnt => $v_locnt) {
+                            foreach ($ketqua as $k_ketqua => $v_ketqua) {
                                 ?>
                         <tr>
                             <td>
-                                <?php echo $v_locnt['name'] ?>
+                                <?php echo $v_ketqua['name'] ?>
                             </td>
                             <td>
-                                <?php echo $v_locnt['sdt'] ?>
+                                <?php echo $v_ketqua['email'] ?>
                             </td>
                             <td>
-                                <?php echo $v_locnt['email'] ?>
+                                <?php echo $v_ketqua['phone'] ?>
                             </td>
-                            <td>
-                            <?php
-                                foreach ($student as $k_student => $v_student){
-                                    if($v_locnt['email'] == $v_student['email']){
-                                        foreach ($student_courses as $k_student_courses => $v_student_courses){
-                                            if($v_student_courses['student_id'] == $v_student['id']){
-                                                echo 'x';
-                                            }
-                                        }
-                                    }
-                                }
-                                ?>
-                            </td>
-                            <td>
-                            <?php
-                                foreach ($student as $k_student => $v_student){
-                                    if($v_locnt['email'] == $v_student['email']){
-                                        foreach ($student_learn as $k_student_learn => $v_student_learn){
-                                            if($v_student_learn['student_id'] == $v_student['id']){
-                                                echo 'x';
-                                            }
-                                        }
-                                    }
-                                }
-                                ?>
-                            </td>
-                            <td>
-                            <?php
-                                foreach ($student as $k_student => $v_student){
-                                    if($v_locnt['email'] == $v_student['email']){
-                                        foreach ($comment as $k_comment => $v_comment){
-                                            if($v_comment['student_id'] == $v_student['id']){
-                                                echo 'x';
-                                            }
-                                        }
-                                    }
-                                }
-                                ?>
-                            </td>
-                            <td>
-                            <?php
-                                foreach ($student as $k_student => $v_student){
-                                    if($v_locnt['email'] == $v_student['email']){
-                                        foreach ($exercise as $k_exercise => $v_exercise){
-                                            if($v_exercise['student_id'] == $v_student['id']){
-                                                echo 'x';
-                                            }
-                                        }
-                                    }
-                                }
-                                ?>
-                            </td>
+                            
                         </tr>
                                 <?php
                             }
