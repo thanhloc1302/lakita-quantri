@@ -185,7 +185,7 @@ class learn extends CI_Controller {
                 redirect('learn/update');
 
             if (!empty($edit))
-                redirect('learn/index');
+                redirect($this->session->userdata('curr_segment_learn'));
         }
 
         $data['row'] = $this->lib_mod->detail('learn', array('id' => $id));

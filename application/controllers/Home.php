@@ -212,7 +212,7 @@ class Home extends CI_Controller {
     }
 
     function myupload() {
-       $targetPath = UPLOAD . 'data/source/video_source/' . date('Y/m/d'); 
+        $targetPath = UPLOAD . 'data/source/video_source/' . date('Y/m/d');
         $this->lib_mod->make_dir($targetPath);
         $token_input = $this->input->post('token');
         $token = $token_input . 'AceTienDung';
@@ -220,7 +220,7 @@ class Home extends CI_Controller {
         if (!empty($_FILES) && $token == $verifyToken) {
             $tempFile = $_FILES['Filedata']['tmp_name'];
             $extend = pathinfo($_FILES['Filedata']['name'], PATHINFO_EXTENSION);
-            $nice_name = $this->lib_mod->make_url($_FILES['Filedata']['name']) . '-' . rand(). 'ChuyenPN' . '.' . $extend;
+            $nice_name = $this->lib_mod->make_url($_FILES['Filedata']['name']) . '-' . rand() . 'ChuyenPN' . '.' . $extend;
             $targetFile = rtrim($targetPath, '/') . '/' . $nice_name;
 
             // Validate the file type
@@ -233,6 +233,24 @@ class Home extends CI_Controller {
             } else {
                 echo '0';
             }
+        }
+    }
+
+    function curr_segment() {
+        $this->load->library('session');
+        $segment = $this->input->post('curr');
+        $page = $this->input->post('page');
+
+        if ($page == 'learn') {
+            $this->session->set_userdata(array('curr_segment_learn' => $segment));
+        } elseif ($page == 'course') {
+            $this->session->set_userdata(array('curr_segment_course' => $segment));
+        } elseif ($page == 'student') {
+            $this->session->set_userdata(array('curr_segment_student' => $segment));
+        } elseif ($page == 'news') {
+            $this->session->set_userdata(array('curr_segment_news' => $segment));
+        } elseif ($page == 'chapter') {
+            $this->session->set_userdata(array('curr_segment_chapter' => $segment));
         }
     }
 

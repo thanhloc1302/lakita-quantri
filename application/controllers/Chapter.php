@@ -123,7 +123,7 @@ class Chapter extends CI_Controller
                     redirect('chapter/update/0');
 
                 if(!empty($edit))
-    	            redirect('chapter/index');
+    	            redirect($this->session->userdata('curr_segment_chapter'));
         	}
             else
             {

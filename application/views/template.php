@@ -136,7 +136,30 @@ if($controller != 'exercise') { ?>
                         }
                     });
                 });
-            })
+             
+             
+             
+                $('.curr_segment').on('click',function(e){
+                var segment = $(location).attr('href');  
+                var base_url = $('#base_url').val();
+                var curr = segment.slice(base_url.length, segment.length);
+                var page = $('#page').val();
+                $.ajax({
+                        type: "POST",
+                        url: base_url + 'home/curr_segment',
+                        data: {
+                            curr: curr,
+                            page: page
+                        },
+                        dataType: "text",
+                        success: function (result)
+                        {
+                            console.log(result);
+                        }
+                    });
+                });
+                
+            });
         </script>
 
         <script type="text/javascript">

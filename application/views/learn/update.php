@@ -457,7 +457,6 @@ $( document ).ready(function() {
         }
     },1000);
 });
-  var vid = document.getElementById("pre_video");
-    alert(vid.duration);
+  
     
 </script>

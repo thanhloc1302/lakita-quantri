@@ -394,7 +394,7 @@
 
 										<td class="center">
 
-											<a href="<?php echo base_url().'courses/update/'.$value['id']; ?>" class="btn default btn-xs purple">
+											<a href="<?php echo base_url().'courses/update/'.$value['id']; ?>" class="btn default btn-xs purple curr_segment">
 
 												<i class="fa fa-edit"></i> Sửa
 
@@ -495,5 +495,6 @@
 	</div>
 
 </div>
+<input type="hidden" id="page" value="course">
 
 <!-- END CONTENT -->

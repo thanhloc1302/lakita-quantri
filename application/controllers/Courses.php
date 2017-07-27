@@ -206,7 +206,7 @@ class Courses extends CI_Controller {
                     redirect('courses/update');
 
                 if (!empty($edit))
-                    redirect('courses/index');
+                    redirect($this->session->userdata('curr_segment_course'));
             }
             else {
                 $this->session->set_flashdata('error', $error);

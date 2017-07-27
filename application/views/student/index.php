@@ -205,7 +205,7 @@
                                                 <i class="fa fa-eye"></i> Xem
                                             </a>
                                             <?php if ($this->admin_id == 35) { ?>
-                                                <a href="<?php echo base_url() . 'student/update/' . $value['id']; ?>" class="btn default btn-xs purple">
+                                                <a href="<?php echo base_url() . 'student/update/' . $value['id']; ?>" class="btn default btn-xs purple curr_segment">
                                                     <i class="fa fa-edit"></i> Sửa
                                                 </a>
 
@@ -260,4 +260,6 @@
         <!-- END PAGE CONTENT-->
     </div>
 </div>
+<input type="hidden" id="page" value="student">
+
 <!-- END CONTENT -->

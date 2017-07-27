@@ -179,7 +179,7 @@ class Student extends CI_Controller {
                     }
                 }
 
-                redirect('student/index');
+                redirect($this->session->userdata('curr_segment_student'));
             } else {
                 $this->session->set_flashdata('error', $error);
                 redirect('student/update/' . $id);
