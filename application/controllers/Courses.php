@@ -254,7 +254,7 @@ class Courses extends CI_Controller {
             $this->session->set_flashdata('error', 'Lỗi không xác định được bản ghi để cập nhật');
         }
 
-        redirect('courses/index');
+        redirect($this->session->userdata('curr_segment_course'));
     }
 
     function delete($items_id = array()) {

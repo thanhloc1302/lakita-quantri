@@ -380,11 +380,11 @@
 
 											<?php if($value['status']){ ?>
 
-												<a href="<?php echo base_url().'courses/status/'.$value['id'].'/'.$value['status']; ?>" class="txt-center btn btn-sm green filter-cancel"><i class="fa fa-check"></i></a>												
+												<a href="<?php echo base_url().'courses/status/'.$value['id'].'/'.$value['status']; ?>" class="txt-center btn btn-sm green filter-cancel curr_segment"><i class="fa fa-check"></i></a>												
 
 											<?php }else{ ?>
 
-												<a href="<?php echo base_url().'courses/status/'.$value['id'].'/'.$value['status']; ?>" class="txt-center btn btn-sm yellow filter-cancel"><i class="fa fa-times"></i></a>												
+												<a href="<?php echo base_url().'courses/status/'.$value['id'].'/'.$value['status']; ?>" class="txt-center btn btn-sm yellow filter-cancel curr-segment"><i class="fa fa-times"></i></a>												
 
 											<?php } ?>
 
