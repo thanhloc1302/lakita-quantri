@@ -297,7 +297,7 @@ class Courses extends CI_Controller {
             $this->session->set_flashdata('error', 'Bạn phải chọn ít nhất một bản ghi cần xóa.');
         }
 
-        redirect('courses/index');
+        redirect($this->session->userdata('curr_segment_course'));
     }
 
     function search() {

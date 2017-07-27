@@ -209,7 +209,7 @@
                                                     <i class="fa fa-edit"></i> Sửa
                                                 </a>
 
-                                                <a href="<?php echo base_url() . 'student/delete/' . $value['id']; ?>" onclick="return confirm('Bạn chắc chắn muốn xoá bản ghi này?');" class="btn default btn-xs red">
+                                                <a href="<?php echo base_url() . 'student/delete/' . $value['id']; ?>" onclick="return confirm('Bạn chắc chắn muốn xoá bản ghi này?');" class="btn default btn-xs red curr_segment">
                                                     <i class="fa fa-trash-o"></i> Xóa
                                                 </a>
                                             <?php } ?>

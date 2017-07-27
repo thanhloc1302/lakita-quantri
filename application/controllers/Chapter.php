@@ -220,7 +220,7 @@ class Chapter extends CI_Controller
         	$this->session->set_flashdata('error', 'Bạn phải chọn ít nhất một bản ghi cần xóa.');
         }
 
-        redirect('chapter/index');
+        redirect($this->session->userdata('curr_segment_chapter'));
 	}
 
 
