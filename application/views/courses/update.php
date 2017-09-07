@@ -219,7 +219,7 @@
 
                                 <div class="form-group">
                                     <label for="inputEmail12" class="control-label pull-left"><i>Giá gốc</i></label>
-                                    <input class="form-control mymoney" value="<?php if(isset($row[0])) echo $row[0]['price_root'];?>" name="price_root" type="text"/>
+                                    <input class="form-control mymoney" value="<?php if(isset($row[0])) echo $row[0]['price_root2'];?>" name="price_root" type="text"/>
                                 </div>   
 
                                 <div class="form-group">

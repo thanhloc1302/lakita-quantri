@@ -73,97 +73,140 @@ class BaoCaoVanHanhHocVien extends CI_Controller {
     }
 
     function in() {
+        die;
+        $this->load->model('loc_test_model');
+        $this->load->model('courses_model');
+        $this->load->model('student_model');
+        $this->load->model('student_courses_model');
+        $this->load->model('student_learn_model');
+        $contact = array();
+        $input['order'] = array('date_reg' => 'DESC');
+        //$input['limit'] = array('100', '0');
+        $contact = $this->loc_test_model->load_all($input);
+
+        $locnt = array();
 
 
+        foreach ($contact as $k_contact => $v_contact) {
+            $student_id = $this->check_active($v_contact['email'], $v_contact['phone']);
+            if ($student_id != '') {
+                $courses = $this->student_courses_model->load_all(array('select' => 'courses_id', 'where' => array('student_id' => $student_id)));
+                foreach ($courses as $c_key => $c_value) {
+                    $locnt[] = array(
+                        'name' => $v_contact['name'],
+                        'phone' => $v_contact['phone'],
+                        'email' => $v_contact['email'],
+                        'date_reg' => $v_contact['date_reg'],
+                        'active' => 'x',
+                        'create_date' => $this->get_create_date($v_contact['email'], $v_contact['phone']),
+                        'course' => $this->get_course_name($c_value['courses_id']),
+                        'learn' => $this->check_course_done($student_id, $c_value['courses_id']),
+                        'last_log_in' => $this->get_last_log_in($student_id)
+                    );
+                }
+            } else {
+                $locnt[] = array(
+                    'name' => $v_contact['name'],
+                    'phone' => $v_contact['phone'],
+                    'email' => $v_contact['email'],
+                    'date_reg' => $v_contact['date_reg'],
+                    'active' => '',
+                    'create_date' => '0',
+                    'course' => '',
+                    'learn' => '',
+                    'last_log_in' => '0'
+                );
+            }
+        }
 
-//        $c1 = 'SELECT * FROM `tbl_locnt`';
-//        $c2 = $this->db->query($c1);
-//        $locnt = $c2->result_array();
-//
-//        $b1 = 'SELECT * FROM `tbl_student`';
-//        $b2 = $this->db->query($b1);
-//        $student = $b2->result_array();
-//
-//
-////        $a1 = 'SELECT DISTINCT tbl FROM `tbl_student_courses` ';
-////        $a2 = $this->db->query($a1);
-////        $student_courses = $a2->result_array();
-//
-//
-//
-//        $d1 = 'SELECT DISTINCT tbl_student_learn.student_id FROM `tbl_student_learn`';
-//        $d2 = $this->db->query($d1);
-//        $student_learn = $d2->result_array();
-//
-//
-//        $e1 = 'SELECT DISTINCT tbl_comment.student_id FROM `tbl_comment`';
-//        $e2 = $this->db->query($e1);
-//        $comment = $e2->result_array();
-//
-//        
-//        $f1 = 'SELECT DISTINCT tbl_exercise.student_id FROM `tbl_exercise`';
-//        $f2 = $this->db->query($f1);
-//        $exercise = $f2->result_array();
-        
-        $g1='SELECT DISTINCT tbl_student.name,tbl_student.email,tbl_student.phone FROM tbl_student_courses,tbl_student WHERE tbl_student.id = tbl_student_courses.student_id ORDER BY tbl_student.id DESC';
-        $g2=$this->db->query($g1);
-        $data['ketqua'] = $g2->result_array();
-//        $data['keyqua']=array();
-//         
-//        foreach ($locnt as $k_locnt => $v_locnt){
-//            
-//            $data['keyqua'][$k_locnt] = $v_locnt;
-//            foreach ($student as $k_student=> $v_student){
-//                if( ($v_locnt['email'] == $v_student['email'])||($v_locnt['sdt'] == $v_student['phone'])){
-//                    foreach ($student_courses as $k_student_courses => $v_student_courses){
-//                        if( $v_student['id'] == $v_student_courses['student_id'] ){
-//                            $data['keyqua'][$k_locnt]['dakichhoat'] = 'x';
-//                        }else{
-//                            $data['keyqua'][$k_locnt]['dakichhoat'] = '';
-//                        }
-//                    }
-//                    foreach ($student_learn as $k_student_learn => $v_student_learn){
-//                        if( $v_student['id'] == $v_student_learn['student_id'] ){
-//                            $data['keyqua'][$k_locnt]['daxemvideo'] = 'x';
-//                        }else{
-//                            $data['keyqua'][$k_locnt]['daxemvideo'] = '';
-//                        }
-//                    }
-//                    foreach ($comment as $k_comment => $v_comment){
-//                        if( $v_student['id'] == $v_comment['student_id'] ){
-//                            $data['keyqua'][$k_locnt]['dacmt'] = 'x';
-//                        }else{
-//                            $data['keyqua'][$k_locnt]['dacmt'] = '';
-//                        }
-//                    }
-//                    foreach ($exercise as $k_exercise => $v_exercise){
-//                        if( $v_student['id'] == $v_exercise['student_id'] ){
-//                            $data['keyqua'][$k_locnt]['dalambai'] = 'x';
-//                        }else{
-//                            $data['keyqua'][$k_locnt]['dalambai'] = '';
-//                        }
-//                    }
-//                    
-//                }
-//            }
-//        }
-        
-        
+//        echo "<pre>";
+//        print_r($locnt);
+//        die;
+        $data['ketqua'] = $locnt;
 
 
-//        $c = 'UPDATE tbl_student_courses
-//SET tbl_student_courses.courses_id = 81
-//WHERE tbl_student_courses.courses_id = 71 and tbl_student_courses.student_id IN ('.$b.')';
-//        $c2 = $this->db->query($c);
-
-
-
-        
-        
         $data['content'] = 'BaoCaoVanHanhHocVien/index';
         $data['header'] = 'dash_header';
         $data['footer'] = 'list_base_footer';
         $this->load->view('template', $data);
     }
 
+    function check_active($email, $phone) {
+        $this->load->model('student_model');
+        if ($email != '' && $phone != '' && strtolower($email) != 'lakitavn@gmail.com') {
+            $input['like_before'] = array('phone' => $phone);
+            $input['or_where'] = array('email' => $email);
+        } elseif ($phone != '' && $email == '') {
+            $input['like_before'] = array('phone' => $phone);
+        } elseif ($email != ''&& strtolower($email) != 'lakitavn@gmail.com' && $phone == '') {
+            $input['where'] = array('email' => $email);
+        } else {
+            $input['like_before'] = array('phone' => $phone);
+        }
+        $active = $this->student_model->load_all($input);
+
+        if (!empty($active)) {
+            return $active[0]['id'];
+        } else {
+            return '';
+        }
+    }
+
+    function get_create_date($email, $phone) {
+        $this->load->model('student_model');
+        if ($email != '' && $phone != '' && strtolower($email) != 'lakitavn@gmail.com') {
+            $input['like_before'] = array('phone' => $phone);
+            $input['or_where'] = array('email' => $email);
+        } elseif ($phone != '' && $email == '') {
+            $input['like_before'] = array('phone' => $phone);
+        } elseif ($email != ''&& strtolower($email) != 'lakitavn@gmail.com' && $phone == '') {
+            $input['where'] = array('email' => $email);
+        } else {
+            $input['like_before'] = array('phone' => $phone);
+        }
+        $active = $this->student_model->load_all($input);
+        if (!empty($active)) {
+            return $active[0]['createdate'];
+        }
+    }
+
+    function get_last_log_in($student_id) {
+        $this->load->model('watching_model');
+        $input['where'] = array('student_id' => $student_id);
+        $time = $this->watching_model->load_all($input);
+        if (!empty($time)) {
+            return $time[0]['time'];
+        } else {
+            return '0';
+        }
+    }
+
+    function check_course_done($student_id, $course_id) {
+        $this->load->model('courses_model');
+        $this->load->model('student_learn_model');
+        $this->load->model('learn_model');
+
+
+        //đếm số bài đã học
+        $input_learn['where'] = array('student_id' => $student_id, 'courseID' => $course_id);
+        $learned = count($this->student_learn_model->load_all($input_learn));
+
+        //đếm số bài của khóa
+        $input_course['where'] = array('courses_id' => $course_id, 'status' => '1');
+        $learn_total = count($this->learn_model->load_all($input_course));
+
+        if ($learned == $learn_total) {
+            return 'hoàn thành';
+        } else {
+            return $learned;
+        }
+    }
+    
+    function get_course_name($course_id){
+        $this->load->model('courses_model');
+        $input['where'] = array('id' => $course_id);
+        $course = $this->courses_model->load_all($input);
+        return $course[0]['name'];
+    }
+    
 }

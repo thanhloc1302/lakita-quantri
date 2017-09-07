@@ -372,7 +372,7 @@
 
 										<td class="center">
 
-											<?php echo number_format(str_replace('.', '', $value['price_sale']));?>
+											<?php echo number_format(str_replace('.', '', $value['price_root2']));?>
 
 										</td>
 

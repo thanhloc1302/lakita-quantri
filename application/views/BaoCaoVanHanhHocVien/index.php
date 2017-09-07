@@ -1,30 +1,3 @@
-<!-- bây giờ viết trên local thì 2 file css và js để tạm như link dưới, lúc nào up lên thì chỉnh lại sau -->
-<!--<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>styles/assets/plugins/bootstrap/css/bootstrap.min.css"  />-->
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>styles/assest/plugins/bootstrap-datepicker/css/datepicker.css" />
-
-<!--<script type="text/javascript" src="<?php echo base_url(); ?>styles/assets/plugins/jquery-1.10.2.min.js"></script>-->
-<!--<script type="text/javascript" src="<?php echo base_url(); ?>styles/assets/plugins/bootstrap/js/bootstrap.min.js"></script>-->
-<!--<script type="text/javascript" src="<?php echo base_url(); ?>styles/assest/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>-->
-
-
-<style>
-    .sticky1 {
-        position: fixed;
-        top: 27px;
-    }
-    .header1 {
-        width: 100%;
-        padding: 15px 0;
-    }
-</style>
-
-
-<div class="page-content-wrapper">
-    <div class="page-content" style="height: 1100px"> 
-        <div >
-            <div class="col-lg-12">
-
-                
 
                 
 
@@ -34,7 +7,7 @@
                     <thead>
                         
                     <th>
-                        ten hoc vien
+                        tên học viên
                     </th>
                     <th>
                         email
@@ -42,7 +15,24 @@
                     <th>
                         sdt
                     </th>
-                    
+                    <th>
+                        Ngày đăng ký mua
+                    </th>
+                    <th>
+                        Kích hoạt
+                    </th>
+                    <th>
+                        Ngày kích hoạt
+                    </th>
+                    <th>
+                        Khóa học
+                    </th>
+                    <th>
+                        đã học
+                    </th>
+                    <th>
+                        lần cuối đăng nhập
+                    </th>
             
                     </thead>
                     <tbody>
@@ -59,6 +49,24 @@
                             <td>
                                 <?php echo $v_ketqua['phone'] ?>
                             </td>
+                            <td>
+                                <?php echo date('H:i:s d/m/Y', $v_ketqua['date_reg']); ?>
+                            </td>
+                            <td>
+                                <?php echo $v_ketqua['active'] ?>
+                            </td>
+                            <td>
+                                <?php echo date('H:i:s d/m/Y', $v_ketqua['create_date']); ?>
+                            </td>
+                            <td>
+                                <?php echo $v_ketqua['course'] ?>
+                            </td>
+                            <td>
+                                <?php echo $v_ketqua['learn'] ?>
+                            </td>
+                            <td>
+                                <?php echo date('H:i:s d/m/Y', $v_ketqua['last_log_in']); ?>
+                            </td>
                             
                         </tr>
                                 <?php
@@ -72,33 +80,3 @@
                
 
 
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-
-    var header = document.querySelector('.header1');
-    var origOffsetY = header.offsetTop;
-
-    function onScroll(e) {
-        window.scrollY >= origOffsetY ? header.classList.add('sticky1') :
-                header.classList.remove('sticky1');
-    }
-
-    document.addEventListener('scroll', onScroll);
-
-</script>
-
-<script type="text/javascript">
-    $(function () {
-        $('#dp1').datepicker();
-    });
-    $(function () {
-        $('#dp2').datepicker();
-    });
-    $(function () {
-        $('#datepicker2').datepicker();
-    });
-</script>

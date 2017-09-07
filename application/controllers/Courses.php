@@ -129,7 +129,7 @@ class Courses extends CI_Controller {
                     'parent' => 0,
                     'status' => $this->input->post('status') == 1 ? 1 : 0,
                     'sort' => trim($this->input->post('sort')),
-                    'price_root' => $price_root,
+                    'price_root2' => $price_root,
                     'price_sale' => $price_sale,
                     'length' => trim($this->input->post('length')),
                     'create_date' => time(),
