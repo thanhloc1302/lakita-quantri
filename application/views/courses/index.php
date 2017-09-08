@@ -496,5 +496,25 @@
 
 </div>
 <input type="hidden" id="page" value="course">
-
+<form></form>
+<form  action="<?php echo base_url();?>courses/import_course_sale" method="POST" class="form-inline" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Vui lòng chọn file excel danh sách khóa khuyến mại</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="file"  id="image" name="file" class="marginbottom20">
+                        <input type="submit" class="btn btn-success" value="Tải lên" name="submit" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <!-- END CONTENT -->
+<script>
+    
+</script>

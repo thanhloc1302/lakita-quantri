@@ -218,10 +218,7 @@ class Courses extends CI_Controller {
         $data['speaker'] = $this->lib_mod->load_all('speaker', 'id, name', array('status' => 1), '', '', array('sort' => 'desc'));
         $data['row'] = $this->lib_mod->detail('courses', array('id' => $id));
         $data['id'] = $id;
-        $data['group_courses_id'] = 
-                isset($this->lib_mod->load_all('courses', '', array('id' => $id), '', '', '')[0]['group_courses_id'])
-                ?$this->lib_mod->load_all('courses', '', array('id' => $id), '', '', '')[0]['group_courses_id']
-                :0;
+        $data['group_courses_id'] = isset($this->lib_mod->load_all('courses', '', array('id' => $id), '', '', '')[0]['group_courses_id']) ? $this->lib_mod->load_all('courses', '', array('id' => $id), '', '', '')[0]['group_courses_id'] : 0;
         $data['content'] = 'courses/update';
         $data['header'] = 'edit_adv_header';
         $data['footer'] = 'edit_adv_footer';
@@ -363,6 +360,48 @@ class Courses extends CI_Controller {
 
             $data['group_courses'] = $this->lib_mod->load_all('group_courses', 'id, name', array('status' => 1), '', '', array('sort' => 'desc'));
             $this->load->view('template', $data);
+        }
+    }
+
+    function import_course_sale() {
+        $this->load->model('courses_model');
+        $file_path = '';
+        $config['upload_path'] = './data/course_sale';
+        $config['allowed_types'] = 'xls|xlsx';
+        $config['max_size'] = '100000';
+        $config['file_name'] = date('Y-m-d-H-i');
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('file')) {
+            $data = $this->upload->data();
+            $file_path = $data['full_path'];
+            $this->load->library('PHPExcel');
+            $objPHPExcel = PHPExcel_IOFactory::load($file_path);
+            $sheet = $objPHPExcel->getActiveSheet();
+
+            $time_start = $sheet->rangeToArray('A1:A1');
+            $time_end = $sheet->rangeToArray('B1:B1');
+            $data1 = $sheet->rangeToArray('A2:B1000');
+
+//            echo '<pre>';
+//            print_r($time_start);
+//            print_r( strtotime($time_start[0][0])  );
+//            die;
+            
+            
+            foreach ($data1 as $row) {
+                if ($row[0] != '') {
+                    $where = array('course_code' => $row[0]);
+                    $price_sale = array(
+                        'price_sale' => $row[1],
+                        'time_start_sale' => strtotime($time_start[0][0]),
+                        'time_end_sale' => strtotime($time_end[0][0])
+                    );
+                    $this->courses_model->update($where,$price_sale);
+                }
+            }
+            echo '<script>alert("cập nhật danh sách khuyến mại thành công!"); </script>';
+            echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+            
         }
     }
 
