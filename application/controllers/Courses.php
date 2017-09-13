@@ -364,45 +364,48 @@ class Courses extends CI_Controller {
     }
 
     function import_course_sale() {
+        
+        //cập nhật giá từ file google sheet
         $this->load->model('courses_model');
-        $file_path = '';
-        $config['upload_path'] = './data/course_sale';
-        $config['allowed_types'] = 'xls|xlsx';
-        $config['max_size'] = '100000';
-        $config['file_name'] = date('Y-m-d-H-i');
-        $this->load->library('upload', $config);
-        if ($this->upload->do_upload('file')) {
-            $data = $this->upload->data();
-            $file_path = $data['full_path'];
-            $this->load->library('PHPExcel');
-            $objPHPExcel = PHPExcel_IOFactory::load($file_path);
-            $sheet = $objPHPExcel->getActiveSheet();
-
-            $time_start = $sheet->rangeToArray('A1:A1');
-            $time_end = $sheet->rangeToArray('B1:B1');
-            $data1 = $sheet->rangeToArray('A2:B1000');
+        $tweets = file_get_contents('https://sheets.googleapis.com/v4/spreadsheets/1-qYJJ5f4BH-Js8jgqpTqjRFrcjabkMAbQq1oMWbvoFM/values/Sheet1!A:D?key=AIzaSyCdjll4ib79ZGtUEEEAxksl6zff2NkLCII');
+        $tweets = json_decode($tweets);
+        $data = $tweets->values;
+        $time_start = $data[0][0];
+        $time_end = $data[0][1];
+        array_shift($data);
 
 //            echo '<pre>';
-//            print_r($time_start);
-//            print_r( strtotime($time_start[0][0])  );
+//            print_r($data);
 //            die;
-            
-            
-            foreach ($data1 as $row) {
-                if ($row[0] != '') {
-                    $where = array('course_code' => $row[0]);
-                    $price_sale = array(
-                        'price_sale' => $row[1],
-                        'time_start_sale' => strtotime($time_start[0][0]),
-                        'time_end_sale' => strtotime($time_end[0][0])
-                    );
-                    $this->courses_model->update($where,$price_sale);
-                }
+        foreach ($data as $row) {
+            if ($row[0] != '') {
+                $where = array('course_code' => $row[0], 'status' => '1');
+                $price_sale = array(
+                    'price_sale' => $row[1],
+                    'time_start_sale' => strtotime($time_start),
+                    'time_end_sale' => strtotime($time_end)
+                );
+                $this->courses_model->update($where, $price_sale);
             }
-            echo '<script>alert("cập nhật danh sách khuyến mại thành công!"); </script>';
-            echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
-            
         }
+        
+        //up banner và popup
+        $config['upload_path'] = '../styles/v2.0/img/event';
+        $config['allowed_types'] = 'png';
+        $config['max_size'] = '100000';
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('banner')) {
+            $data_banner = $this->upload->data();
+            rename($data_banner['full_path'], $data_banner['file_path'].'banner.png');
+        }
+        if ($this->upload->do_upload('popup')) {
+            $data_banner = $this->upload->data();
+            rename($data_banner['full_path'], $data_banner['file_path'].'popup.png');
+        }
+        
+        
+        echo '<script>alert("cập nhật danh sách khuyến mại thành công!"); </script>';
+        echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
     }
 
 }

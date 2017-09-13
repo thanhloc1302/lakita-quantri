@@ -502,12 +502,16 @@
         <div class="col-md-10 col-md-offset-2">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Vui lòng chọn file excel danh sách khóa khuyến mại</h3>
+                    <h3 class="panel-title">Thông tin event khuyến mại giảm giá</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <input type="file"  id="image" name="file" class="marginbottom20">
-                        <input type="submit" class="btn btn-success" value="Tải lên" name="submit" />
+                        <b>Ảnh banner :</b>
+                        <input type="file"  id="image" name="banner" class="marginbottom20">
+                        <b>Ảnh popup :</b>
+                        <input type="file"  id="image" name="popup" class="marginbottom20">
+                        <a style="margin-top: 10px" class="btn btn-danger" target="_blank" href="https://docs.google.com/spreadsheets/d/1-qYJJ5f4BH-Js8jgqpTqjRFrcjabkMAbQq1oMWbvoFM/edit#gid=0">Bảng giá khuyến mại</a>
+                        <input style="margin-top: 10px" type="submit" class="btn btn-success" value="cập nhật" name="submit" />
                     </div>
                 </div>
             </div>
