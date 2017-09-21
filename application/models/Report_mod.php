@@ -78,7 +78,7 @@ function count_learn(){
 }
 
 public function tongkh($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("SELECT count(student_id) as 'sohv' from tbl_student_courses 
@@ -95,7 +95,7 @@ public function tongkh($date_dau, $date_cuoi) {
     }
 
     public function motvideo($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $this->db->query("CREATE or replace view tbl_sum_learn AS select Student_id,COUNT(learn_ID) as 'sum_learn' FROM tbl_student_learn,tbl_courses WHERE
@@ -113,7 +113,7 @@ public function tongkh($date_dau, $date_cuoi) {
     }
 
     public function muoivideo($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $this->db->query("CREATE or replace view tbl_sum_learn AS select Student_id,COUNT(learn_ID) as 'sum_learn' FROM tbl_student_learn,tbl_courses WHERE
@@ -131,7 +131,7 @@ public function tongkh($date_dau, $date_cuoi) {
     }
 
     public function allvideo($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $this->db->query("CREATE or replace view tbl_sum_learn AS select Student_id,COUNT(learn_ID) as 'sum_learn' FROM tbl_student_learn,tbl_courses WHERE
@@ -150,7 +150,7 @@ WHERE tbl_learn.courses_id=" . $value . ")");
     }
 
     public function cmt_support($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("SELECT COUNT(DISTINCT(parent)) as 'socmt' 
@@ -168,7 +168,7 @@ WHERE tbl_learn.courses_id=" . $value . ")");
     }
 
     public function cmt_nosupport($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("select count(id) as 'socmt' from tbl_comment where courses_id=" . $value . " 
@@ -185,7 +185,7 @@ and createdate >=" . $date_dau . "");
     }
 
     public function camnhan($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("select count(vote_description) as 'socamnhan' from tbl_vote where courseid=" . $value . ""
@@ -201,7 +201,7 @@ and createdate >=" . $date_dau . "");
     }
 
     public function fivestar($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("Select count(ID) as 'sovote' from tbl_vote where vote_star_number = 5 and courseid=" . $value . ""
@@ -217,7 +217,7 @@ and createdate >=" . $date_dau . "");
     }
 
     public function forstar($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("Select count(ID) as 'sovote' from tbl_vote where vote_star_number = 4 and courseid=" . $value . ""
@@ -233,7 +233,7 @@ and createdate >=" . $date_dau . "");
     }
 
     public function threestar($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("Select count(ID) as 'sovote' from tbl_vote where vote_star_number = 3 and courseid=" . $value . ""
@@ -248,7 +248,7 @@ and createdate >=" . $date_dau . "");
     }
 
     public function twostar($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("Select count(ID) as 'sovote' from tbl_vote where vote_star_number = 2 and courseid=" . $value . ""
@@ -264,7 +264,7 @@ and createdate >=" . $date_dau . "");
     }
 
     public function onestar($date_dau, $date_cuoi) {
-        $khoahoc = array(73, 72, 71, 66, 68, 37, 41, 16, 67);
+        $khoahoc = array(82, 81, 80, 78, 77, 75, 74, 73, 72, 71, 66, 68, 37, 41, 16, 67);
         $data = array();
         foreach ($khoahoc as $value) {
             $query = $this->db->query("Select count(ID) as 'sovote' from tbl_vote where vote_star_number = 1 and courseid=" . $value . ""

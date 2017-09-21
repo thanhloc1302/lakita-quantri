@@ -507,7 +507,7 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <b>Ảnh banner :</b>
-                        <input type="file"  id="image" name="banner" class="marginbottom20">
+                        <input type="file"  id="banner" name="banner" class="marginbottom20">
                         <b>Ảnh popup :</b>
                         <input type="file"  id="image" name="popup" class="marginbottom20">
                         <a style="margin-top: 10px" class="btn btn-danger" target="_blank" href="https://docs.google.com/spreadsheets/d/1-qYJJ5f4BH-Js8jgqpTqjRFrcjabkMAbQq1oMWbvoFM/edit#gid=0">Bảng giá khuyến mại</a>

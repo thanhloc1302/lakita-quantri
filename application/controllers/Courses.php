@@ -391,6 +391,7 @@ class Courses extends CI_Controller {
         
         //up banner và popup
         $config['upload_path'] = '../styles/v2.0/img/event';
+        //$config['upload_path'] = './styles/event';
         $config['allowed_types'] = 'png';
         $config['max_size'] = '100000';
         $this->load->library('upload', $config);

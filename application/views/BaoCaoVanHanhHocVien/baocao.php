@@ -103,6 +103,13 @@ table, th, td {
     <table>
         <thead>
         <th></th>
+        <th class="kt">KT110</th>
+        <th class="kt">KT130</th>
+        <th class="kt">KT120</th>
+        <th class="kt">KT210</th>
+        <th class="kt">KT800</th>
+        <th class="ex">EM100</th>
+        <th class="kt">KT600</th>
         <th class="kt">KT400</th>
      <th class="kt">KT500</th>
       <th class="kt">KT300</th>
