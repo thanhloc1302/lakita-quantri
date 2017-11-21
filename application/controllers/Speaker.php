@@ -82,6 +82,7 @@ class Speaker extends CI_Controller
                 $data = array(
                     'type_id' => 0,
                     'name' => trim($this->input->post('name')),
+                    'email' => trim($this->input->post('email')),
                     'title' => trim($this->input->post('title')),
                     'organize' => trim($this->input->post('organize')),
                     'hot' => $this->input->post('hot')==1?1:0,

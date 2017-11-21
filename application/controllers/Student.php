@@ -58,6 +58,13 @@ class Student extends CI_Controller {
         $data['student_id'] = $id;
         $data['student'] = $this->lib_mod->detail('student', array("id" => $id));
         $data['list_courses'] = $this->lib_mod->load_all('student_courses', '', array('student_id' => $id), '', '', array('id' => 'desc'));
+        foreach ($data['list_courses'] as $key => $value){
+            if($value['trial_learn'] == 0){
+                $data['list_courses'][$key]['count_all_learn'] = count($this->lib_mod->detail('student_learn', array('student_id' => $id, 'courseID' => $value['courses_id'])));
+            }else{
+                 $data['list_courses'][$key]['count_all_learn'] = 0 ;
+            }
+        }
         $this->load->view('template', $data);
     }
 
