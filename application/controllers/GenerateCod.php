@@ -35,7 +35,8 @@ class GenerateCod extends CI_Controller {
         }
         $prefix = array(37 => 'E100', 41 => 'E200', 16 => 'E300', 10 => 'E110', 65 => 'TC100',
             66 => 'KT100', 67 => 'E400', 68 => 'KT200', 69 => 'E130', 71 => 'KT300', 72 => 'KT500',
-            73 => 'KT400', 74 => 'KT600', 75 => 'EM100', 77 => 'KT800', 78 => 'KT210', 80 => 'KT120', 'combo' => 'CB100');
+            73 => 'KT400', 74 => 'KT600', 75 => 'EM100', 77 => 'KT800', 78 => 'KT210', 80 => 'KT120', 'combo' => 'CB100',
+            'CBKT210' => 'CBKT210', 'CBKT400' => 'CBKT400', 'CBKT800' => 'CBKT800', 'CBKT110' => 'CBKT110', 'CBKT130' => 'CBKT130');
         $methodID = array('cod' => 1, 'bank' => 2, 'direct' => 3);
         $courseID = $this->input->post('courseID');
         $method = $this->input->post('method');
@@ -48,7 +49,11 @@ class GenerateCod extends CI_Controller {
             // $randStr = substr($randStr, rand(0, 30), 7);
             $search_array = array('first' => 1, 'second' => 4);
             if (array_key_exists($courseID, $prefix)) {
+                if($courseID == 'CBKT210' || $courseID == 'CBKT400' || $courseID == 'CBKT800' || $courseID == 'CBKT110' || $courseID == 'CBKT130'){
+                    $randStr = $prefix[$courseID] . $this->generate->generateRandomStringCombo(4, TRUE);
+                }else{
                 $randStr = $prefix[$courseID] . $this->generate->generateRandomString(5, TRUE);
+                }
             } else {
                 $randStr = 'KHC' . $this->generate->generateRandomString(5, TRUE);
             }
@@ -56,14 +61,37 @@ class GenerateCod extends CI_Controller {
                 $randStr = $prefix[$courseID] . $this->generate->generateRandomString(5, TRUE);
             }
             $param['cod'] = $randStr;
-            $param['course_id'] = ($courseID == 'combo') ? 67 : $courseID;
+            
+            if($courseID == 'combo'){
+                $param['course_id'] = 67;
+            }elseif ($courseID == 'CBKT210') {
+                $param['course_id'] = 78;
+            }elseif ($courseID == 'CBKT400'){
+                $param['course_id'] = 73;
+            }elseif ($courseID == 'CBKT800'){
+                $param['course_id'] = 77;
+            }elseif ($courseID == 'CBKT110'){
+                $param['course_id'] = 82;
+            }elseif ($courseID == 'CBKT130'){
+                $param['course_id'] = 81;
+            }else{
+                 $param['course_id'] = $courseID;
+            }
+           
+            
+            
             $param['status'] = 0;
             $param['method'] = $methodID[$method];
             $param['admin_id'] = $this->admin_id;
             $param['trial_learn'] = $trial_learn;
             $param['time'] = time();
-            if ($courseID == 'combo')
+            
+            if($courseID == 'combo'){
                 $param['combo_course_id'] = 65;
+            }elseif ($courseID == 'CBKT210' || $courseID == 'CBKT400' || $courseID == 'CBKT800' || $courseID == 'CBKT110' || $courseID == 'CBKT130') {
+                $param['combo_course_id'] = '37, 65';
+            }
+            
             $this->db->insert('cod_course', $param);
             $action = 'Sinh mã cod "' . $randStr . '". Lý do: ' . $reason;
             $this->lib_mod->insert_log($action);
