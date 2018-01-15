@@ -123,7 +123,7 @@ class Chapter extends CI_Controller
                     redirect('chapter/update/0');
 
                 if(!empty($edit))
-    	            redirect('chapter/index');
+    	            redirect($this->session->userdata('curr_segment_chapter'));
         	}
             else
             {
@@ -172,7 +172,7 @@ class Chapter extends CI_Controller
             $this->session->set_flashdata('error', 'Lỗi không xác định được bản ghi để cập nhật');
 		}
        
-        redirect('chapter/index');
+        redirect($this->session->userdata('curr_segment_chapter'));
 	}
 
 
@@ -220,7 +220,7 @@ class Chapter extends CI_Controller
         	$this->session->set_flashdata('error', 'Bạn phải chọn ít nhất một bản ghi cần xóa.');
         }
 
-        redirect('chapter/index');
+        redirect($this->session->userdata('curr_segment_chapter'));
 	}
 
 

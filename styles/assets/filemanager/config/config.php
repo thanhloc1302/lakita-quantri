@@ -79,8 +79,8 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../../../../data/source/',
-
+	//'current_path' => '../../../../data/source/',
+        'current_path' => '../../../data/source/',
 	/*
 	|--------------------------------------------------------------------------
 	| relative path from filemanager folder to thumbs folder
@@ -122,7 +122,7 @@ $config = array(
 	| in Megabytes
 	|
 	*/
-	'MaxSizeUpload' => 100,
+	'MaxSizeUpload' => 1024,
 
 
 	/*
@@ -285,7 +285,7 @@ $config = array(
 	 * JAVA upload
 	 *******************/
 	'java_upload'                             => true,
-	'JAVAMaxSizeUpload'                       => 200, //Gb
+	'JAVAMaxSizeUpload'                       => 1024, //Gb
 
 
 	//************************************

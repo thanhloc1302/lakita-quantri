@@ -179,7 +179,7 @@ class Student extends CI_Controller {
                     }
                 }
 
-                redirect('student/index');
+                redirect($this->session->userdata('curr_segment_student'));
             } else {
                 $this->session->set_flashdata('error', $error);
                 redirect('student/update/' . $id);
@@ -218,7 +218,7 @@ class Student extends CI_Controller {
             $this->session->set_flashdata('error', 'Lỗi không xác định được bản ghi để cập nhật');
         }
 
-        redirect('student/index');
+        redirect($this->session->userdata('curr_segment_student'));
     }
 
     function delete($items_id = array()) {
@@ -253,7 +253,7 @@ class Student extends CI_Controller {
             $this->session->set_flashdata('error', 'Bạn phải chọn ít nhất một bản ghi cần xóa.');
         }
 
-        redirect('student/index');
+        redirect($this->session->userdata('curr_segment_student'));
     }
 
     function search() {
@@ -392,4 +392,56 @@ class Student extends CI_Controller {
         redirect('student/view/' . $student_id);
     }
 
+    function online() {
+        if ($this->admin_id != 35 && $this->admin_id != 38) {
+            header('Content-Type: text/html; charset=utf-8');
+            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
+            exit;
+        }
+// ip thoi gian info email sdt
+        $this->load->library('pagination');
+        $per_page = 120;
+        $session_per_page = $this->session->userdata('session_per_page');
+        if (isset($session_per_page) && $session_per_page > 0)
+            $per_page = $session_per_page;
+
+        $sql1 = 'select * from tbl_watching_time where '.time().' -  tbl_watching_time.time < 15';
+        $sql2 = $this->db->query($sql1);
+        $total = count($sql2->result_array());
+        
+        
+        if(empty($this->uri->segment(3))){
+            $offset = '';
+        }  else {
+            $offset = ' OFFSET '.$this->uri->segment(3);
+        }
+        
+        $sql3 = 'SELECT * FROM `tbl_watching_time` WHERE ('.time().' - `time` < 15) ORDER BY `time` DESC LIMIT '.$per_page.$offset;
+        $data['rows'] = $this->db->query($sql3)->result_array();
+
+        $danhsachID = array();
+        foreach ($data['rows'] as $key => $value){
+            array_push($danhsachID, $value['student_id']);
+        }
+        
+        if(empty($danhsachID)){
+            $danhsachID = '2626';
+        }
+ 
+        $data['student'] = $this->lib_mod->load_all_where_in('student', 'id, name, email, phone', '', array('id' => $danhsachID), '', '', '');
+        
+        $base_url = site_url('student/online/');
+        $config['base_url'] = $base_url;
+        $config['per_page'] = $per_page;
+        $config['total_rows'] = $total;
+        $config['uri_segment'] = 3;
+        $this->pagination->initialize($config);
+        $data['paging'] = $this->pagination->create_links();
+        $data['total'] = $total;
+        $data['header'] = 'list_base_header';
+        $data['footer'] = 'list_base_footer';
+        $data['content'] = 'student/online';
+        $this->load->view('template', $data);
+    }
+    
 }

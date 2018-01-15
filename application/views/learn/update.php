@@ -322,15 +322,15 @@
                                                 <img id="pre_video" class="w100" src="<?php echo base_url() . 'styles/assets/img/no-image.png'; ?>" alt=""/>                                    
                                             <?php } ?>
                                         </div>                                        
-<!--                                        <div style="position:relative;" class="w100">
-                                            <div style="position:absolute;" class="w100">
-                                                <input id="file_upload" name="file_upload" type="file" multiple="true">
-                                            </div>                                   
-                                        </div>    -->
-<!--                                        <a class="btn default btn-file w100 iframe-btn" id="attack_link" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=attack_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> select files</a>-->
+                                        <!--                                        <div style="position:relative;" class="w100">
+                                                                                    <div style="position:absolute;" class="w100">
+                                                                                        <input id="file_upload" name="file_upload" type="file" multiple="true">
+                                                                                    </div>                                   
+                                                                                </div>    -->
+                                        <!--                                        <a class="btn default btn-file w100 iframe-btn" id="attack_link" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=attack_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> select files</a>-->
 
-<input hidden="hidden" name="video_link" type="text" id="video_link" value="<?php if (isset($row[0]) && !empty($row[0]['video_file'])) echo $row[0]['video_file']; ?>">
-                                    <a class="btn default btn-file w100 iframe-btn" id="select_image" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=video_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> Chọn video</a>                                       
+                                        <input name="video_link" type="hidden" id="video_link" value="<?php if (isset($row[0]) && !empty($row[0]['video_file'])) echo $row[0]['video_file']; ?>">
+                                        <a class="btn default btn-file w100 iframe-btn" id="select_image" type="button" href="<?php echo base_url(); ?>styles/assets/filemanager/dialog.php?type=0&field_id=video_link&lang=vi&akey=7d6bc44b9495644c9fb9f706c8715ee5"><i class="fa fa-upload"></i> Chọn video</a>                                       
                                     </div>                                                                
                                 </div>
 
@@ -408,51 +408,56 @@
 
 
 <script>
-    function ChangeToSlug()
-    {
-        var title, slug;
+                                        function ChangeToSlug()
+                                        {
+                                            var title, slug;
 
-        //Lấy text từ thẻ input title 
-        title = document.getElementById("name").value;
+                                            //Lấy text từ thẻ input title 
+                                            title = document.getElementById("name").value;
 
-        //Đổi chữ hoa thành chữ thường
-        slug = title.toLowerCase();
+                                            //Đổi chữ hoa thành chữ thường
+                                            slug = title.toLowerCase();
 
-        //Đổi ký tự có dấu thành không dấu
-        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
-        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
-        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
-        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
-        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
-        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
-        slug = slug.replace(/đ/gi, 'd');
-        //Xóa các ký tự đặt biệt
-        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-        //Đổi khoảng trắng thành ký tự gạch ngang
-        slug = slug.replace(/ /gi, "-");
-        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
-        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
-        slug = slug.replace(/\-\-\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-/gi, '-');
-        //Xóa các ký tự gạch ngang ở đầu và cuối
-        slug = '@' + slug + '@';
-        slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-        //In slug ra textbox có id “slug”
-        document.getElementById('slug').value = slug;
-    };
+                                            //Đổi ký tự có dấu thành không dấu
+                                            slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+                                            slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+                                            slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+                                            slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+                                            slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+                                            slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+                                            slug = slug.replace(/đ/gi, 'd');
+                                            //Xóa các ký tự đặt biệt
+                                            slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+                                            //Đổi khoảng trắng thành ký tự gạch ngang
+                                            slug = slug.replace(/ /gi, "-");
+                                            //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+                                            //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+                                            slug = slug.replace(/\-\-\-\-\-/gi, '-');
+                                            slug = slug.replace(/\-\-\-\-/gi, '-');
+                                            slug = slug.replace(/\-\-\-/gi, '-');
+                                            slug = slug.replace(/\-\-/gi, '-');
+                                            //Xóa các ký tự gạch ngang ở đầu và cuối
+                                            slug = '@' + slug + '@';
+                                            slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+                                            //In slug ra textbox có id “slug”
+                                            document.getElementById('slug').value = slug;
+                                        }
+                                        ;
 
-$( document ).ready(function() {
-    var curr = $("#video_link").val();
-    setInterval(function(){
-        if($("#video_link").val() != curr){
-            curr = $("#video_link").val();
-            $('#pre_video').remove();
-            $("#playvideo").prepend("<video id='pre_video' width='100%' controls><source src='"+curr+"' type='video/mp4'></video>"); 
-        }
-    },1000);
-});
-  
-    
+                                        $(document).ready(function () {
+                                            var curr = $("#video_link").val();
+                                            setInterval(function () {
+                                                if ($("#video_link").val() != curr) {
+                                                    curr = $("#video_link").val();
+
+                                                    $('#pre_video').remove();
+                                                    $('#playvideo').prepend("<video id='pre_video' width='100%' controls><source src='" + curr + "' type='video/mp4'></video>");
+
+                                                    var vid = document.getElementById("pre_video");
+                                                    alert(vid.duration);
+                                                }
+                                            }, 1000);
+                                        });
+
+
 </script>

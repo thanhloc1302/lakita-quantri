@@ -372,7 +372,7 @@
 
 										<td class="center">
 
-											<?php echo number_format(str_replace('.', '', $value['price_sale']));?>
+											<?php echo number_format(str_replace('.', '', $value['price_root2']));?>
 
 										</td>
 
@@ -380,11 +380,11 @@
 
 											<?php if($value['status']){ ?>
 
-												<a href="<?php echo base_url().'courses/status/'.$value['id'].'/'.$value['status']; ?>" class="txt-center btn btn-sm green filter-cancel"><i class="fa fa-check"></i></a>												
+												<a href="<?php echo base_url().'courses/status/'.$value['id'].'/'.$value['status']; ?>" class="txt-center btn btn-sm green filter-cancel curr_segment"><i class="fa fa-check"></i></a>												
 
 											<?php }else{ ?>
 
-												<a href="<?php echo base_url().'courses/status/'.$value['id'].'/'.$value['status']; ?>" class="txt-center btn btn-sm yellow filter-cancel"><i class="fa fa-times"></i></a>												
+												<a href="<?php echo base_url().'courses/status/'.$value['id'].'/'.$value['status']; ?>" class="txt-center btn btn-sm yellow filter-cancel curr-segment"><i class="fa fa-times"></i></a>												
 
 											<?php } ?>
 
@@ -394,7 +394,7 @@
 
 										<td class="center">
 
-											<a href="<?php echo base_url().'courses/update/'.$value['id']; ?>" class="btn default btn-xs purple">
+											<a href="<?php echo base_url().'courses/update/'.$value['id']; ?>" class="btn default btn-xs purple curr_segment">
 
 												<i class="fa fa-edit"></i> Sửa
 
@@ -402,7 +402,7 @@
 
 
 
-											<a href="<?php echo base_url().'courses/delete/'.$value['id']; ?>" onclick="return confirm('Bạn chắc chắn muốn xoá bản ghi này?');" class="btn default btn-xs red">
+											<a href="<?php echo base_url().'courses/delete/'.$value['id']; ?>" onclick="return confirm('Bạn chắc chắn muốn xoá bản ghi này?');" class="btn default btn-xs red curr_segment">
 
 												<i class="fa fa-trash-o"></i> Xóa
 
@@ -495,5 +495,26 @@
 	</div>
 
 </div>
-
+<input type="hidden" id="page" value="course">
+<form></form>
+<form  action="<?php echo base_url();?>courses/import_course_sale" method="POST" class="form-inline" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Vui lòng chọn file excel danh sách khóa khuyến mại</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="file"  id="image" name="file" class="marginbottom20">
+                        <input type="submit" class="btn btn-success" value="Tải lên" name="submit" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <!-- END CONTENT -->
+<script>
+    
+</script>

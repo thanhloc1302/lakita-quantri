@@ -194,9 +194,9 @@
                                         </td>
                                         <td>
                                             <?php if ($value['status']) { ?>
-                                                <a href="<?php echo base_url() . 'student/status/' . $value['id'] . '/' . $value['status']; ?>" class="txt-center btn btn-sm green filter-cancel"><i class="fa fa-check"></i></a>												
+                                                <a href="<?php echo base_url() . 'student/status/' . $value['id'] . '/' . $value['status']; ?>" class="txt-center btn btn-sm green filter-cancel curr_segment"><i class="fa fa-check"></i></a>												
                                             <?php } else { ?>
-                                                <a href="<?php echo base_url() . 'student/status/' . $value['id'] . '/' . $value['status']; ?>" class="txt-center btn btn-sm yellow filter-cancel"><i class="fa fa-times"></i></a>												
+                                                <a href="<?php echo base_url() . 'student/status/' . $value['id'] . '/' . $value['status']; ?>" class="txt-center btn btn-sm yellow filter-cancel curr_segment"><i class="fa fa-times"></i></a>												
                                             <?php } ?>
 
                                         </td>
@@ -205,11 +205,11 @@
                                                 <i class="fa fa-eye"></i> Xem
                                             </a>
                                             <?php if ($this->admin_id == 35) { ?>
-                                                <a href="<?php echo base_url() . 'student/update/' . $value['id']; ?>" class="btn default btn-xs purple">
+                                                <a href="<?php echo base_url() . 'student/update/' . $value['id']; ?>" class="btn default btn-xs purple curr_segment">
                                                     <i class="fa fa-edit"></i> Sửa
                                                 </a>
 
-                                                <a href="<?php echo base_url() . 'student/delete/' . $value['id']; ?>" onclick="return confirm('Bạn chắc chắn muốn xoá bản ghi này?');" class="btn default btn-xs red">
+                                                <a href="<?php echo base_url() . 'student/delete/' . $value['id']; ?>" onclick="return confirm('Bạn chắc chắn muốn xoá bản ghi này?');" class="btn default btn-xs red curr_segment">
                                                     <i class="fa fa-trash-o"></i> Xóa
                                                 </a>
                                             <?php } ?>
@@ -260,4 +260,6 @@
         <!-- END PAGE CONTENT-->
     </div>
 </div>
+<input type="hidden" id="page" value="student">
+
 <!-- END CONTENT -->

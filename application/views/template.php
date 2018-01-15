@@ -65,31 +65,44 @@ if($controller != 'exercise') { ?>
         <!-- END FOOTER -->
 
         <?php $this->load->view('common/' . $footer); ?>
-
+        <input type="hidden" id="base_url" value="<?php echo base_url() ?>">
         <script type="text/javascript">
-            //............ AJAX ............//
+            /*............ AJAX ............*/
             jQuery(function () {
                 $(".directtab").click(function () {
                     $(".bank").hide();
-                     $(".banktab").removeClass("active1");
+                    $(".banktab").removeClass("active1");
                     $(".direct").show();
                     $(".directtab").addClass("active1");
+                    $(".combo").hide();
+                    $(".combotab").removeClass("active1");
                 });
                 $(".banktab").click(function () {
                     $(".bank").show();
                     $(".banktab").addClass("active1");
                     $(".direct").hide();
-                     $(".directtab").removeClass("active1");
+                    $(".directtab").removeClass("active1");
+                    $(".combo").hide();
+                    $(".combotab").removeClass("active1");
                 });
+                $(".combotab").click(function () {
+                    $(".bank").hide();
+                    $(".banktab").removeClass("active1");     
+                    $(".direct").hide();
+                    $(".directtab").removeClass("active1");
+                    $(".combo").show();
+                    $(".combotab").addClass("active1");
+                    
+                });
+                
+
+                
                 $("#datepicker").hover(function () {
                     $("#datepicker").datepicker();
                 });
 
                 $("#datepicker").change(function () {
                     var selectDate = ($(this).datepicker("getDate").getTime()) / 1000;
-//                    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-//                    d.setUTCSeconds(selectDate);
-//                    console.log(d.toString());
                     $("#date1").val(selectDate);
                 });
                 $("#datepicker2").hover(function () {
@@ -97,10 +110,6 @@ if($controller != 'exercise') { ?>
                 });
                 $("#datepicker2").change(function () {
                     var selectDate = ($(this).datepicker("getDate").getTime()) / 1000;
-
-//                    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-//                    d.setUTCSeconds(selectDate);
-//                    console.log(d.toString());
                     $("#date2").val(selectDate);
                 });
 
@@ -127,7 +136,30 @@ if($controller != 'exercise') { ?>
                         }
                     });
                 });
-            })
+             
+             
+             
+                $('.curr_segment').on('click',function(e){
+                var segment = $(location).attr('href');  
+                var base_url = $('#base_url').val();
+                var curr = segment.slice(base_url.length, segment.length);
+                var page = $('#page').val();
+                $.ajax({
+                        type: "POST",
+                        url: base_url + 'home/curr_segment',
+                        data: {
+                            curr: curr,
+                            page: page
+                        },
+                        dataType: "text",
+                        success: function (result)
+                        {
+                            console.log(result);
+                        }
+                    });
+                });
+                
+            });
         </script>
 
         <script type="text/javascript">

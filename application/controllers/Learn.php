@@ -185,7 +185,7 @@ class learn extends CI_Controller {
                 redirect('learn/update');
 
             if (!empty($edit))
-                redirect('learn/index');
+                redirect($this->session->userdata('curr_segment_learn'));
         }
 
         $data['row'] = $this->lib_mod->detail('learn', array('id' => $id));
@@ -244,7 +244,7 @@ class learn extends CI_Controller {
             $this->session->set_flashdata('error', 'Lỗi không xác định được bản ghi để cập nhật');
         }
 
-        redirect('learn/index');
+        redirect($this->session->userdata('curr_segment_learn'));
     }
 
     function delete($items_id = array()) {
@@ -281,7 +281,7 @@ class learn extends CI_Controller {
             $this->session->set_flashdata('error', 'Bạn phải chọn ít nhất một bản ghi cần xóa.');
         }
 
-        redirect('learn/index');
+        redirect($this->session->userdata('curr_segment_learn'));
     }
 
     function search() {

@@ -254,18 +254,8 @@ class Exercise extends CI_Controller {
         
         //gui email
         $user = $this->lib_mod->detail('student', array('id' => $user_id));  
-        $config['protocol'] = 'smtp';
-                $config['smtp_host'] = 'ssl://smtp.zoho.com';
-                $config['smtp_port'] = '465';
-                $config['smtp_timeout'] = '6000';
-                $config['smtp_user'] = 'cskh@lakita.vn';
-                $config['smtp_pass'] = 'lakita.com.vn';
-                $config['charset'] = 'utf-8';
-                $config['newline'] = "\r\n";
-                $config['mailtype'] = 'html'; // or html
-                $config['validation'] = TRUE; // bool whether to validate email or not
+        
                 $this->load->library("email");
-                $this->email->initialize($config);
                 $this->email->from('cskh@lakita.vn', "lakita.vn");
                 //  $this->email->reply_to('mrtrinh89@gmail.com', "lakita.vn");
                 $emailTo = $user[0]['email'];
