@@ -22,14 +22,14 @@
 }
 
 .tl_tag_select{
-    //margin-left: -94px;
-    //width: 1342px;
+/*    margin-left: -94px;
+    width: 1342px;*/
     height: 45px;
     background-color: #E9EDEF;
 }
 .tl_tag_select div{
     color: #1D7346;
-   // width:250px;
+/*    width:250px;*/
     padding: 0px 15px;
     font-size: 15px;    
     cursor: pointer;

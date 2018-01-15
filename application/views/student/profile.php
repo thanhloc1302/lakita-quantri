@@ -241,13 +241,7 @@
                                                         <?php echo date('d/m/Y', $list['create_date']); ?>
                                                     </td>
                                                     <td class="center">
-                                                        <a href="<?php echo base_url() . 'student/view/' . $value['id']; ?>">                                             
-                                                            <?php
-                                                            $count = $this->lib_mod->count('student_courses', array('student_id' => $value['id']));
-                                                            echo $count . ' bài';
-                                                            ;
-                                                            ?>
-                                                        </a>
+                                                        <?php echo $list['count_all_learn'].' Bài' ?>
                                                     </td>
                                                     <td>
                                                         <?php if ($list['status']) { ?>

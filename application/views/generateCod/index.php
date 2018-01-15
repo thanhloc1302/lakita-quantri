@@ -70,6 +70,12 @@
                                             }
                                             ?>
                                             <option value="combo">Combo tin học văn phòng</option>
+                                            <option value="CBKT210">CBKT210</option>
+                                            <option value="CBKT400">CBKT400</option>
+                                            <option value="CBKT800">CBKT800</option>
+                                            <option value="CBKT110">CBKT110</option>
+                                            <option value="CBKT130">CBKT130</option>
+                                            
                                         </select>
                                     </div>
                                 </div>

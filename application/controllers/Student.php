@@ -58,6 +58,13 @@ class Student extends CI_Controller {
         $data['student_id'] = $id;
         $data['student'] = $this->lib_mod->detail('student', array("id" => $id));
         $data['list_courses'] = $this->lib_mod->load_all('student_courses', '', array('student_id' => $id), '', '', array('id' => 'desc'));
+        foreach ($data['list_courses'] as $key => $value){
+            if($value['trial_learn'] == 0){
+                $data['list_courses'][$key]['count_all_learn'] = count($this->lib_mod->detail('student_learn', array('student_id' => $id, 'courseID' => $value['courses_id'])));
+            }else{
+                 $data['list_courses'][$key]['count_all_learn'] = 0 ;
+            }
+        }
         $this->load->view('template', $data);
     }
 
@@ -124,7 +131,7 @@ class Student extends CI_Controller {
                 'address' => $address,
                 'status' => $this->input->post('status') == 1 ? 1 : 0,
                 'gender' => $this->input->post('gender') == 1 ? 1 : 0,
-                'admin_id' => $this->admin_id,
+               // 'admin_id' => $this->admin_id,
                 'note' => trim($this->input->post('note')),
                 'birthday' => strtotime($this->input->post('birthday'))
             );
@@ -170,7 +177,7 @@ class Student extends CI_Controller {
                         $data_stu_cour = array(
                             'student_id' => $new_id,
                             'courses_id' => $cour_id,
-                            'admin_id' => $this->admin_id,
+                            //'admin_id' => $this->admin_id,
                             'status' => 1,
                             'create_date' => time(),
                         );

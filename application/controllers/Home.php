@@ -240,7 +240,9 @@ class Home extends CI_Controller {
         $this->load->library('session');
         $segment = $this->input->post('curr');
         $page = $this->input->post('page');
-
+        
+        
+        
         if ($page == 'learn') {
             $this->session->set_userdata(array('curr_segment_learn' => $segment));
         } elseif ($page == 'course') {
@@ -252,6 +254,7 @@ class Home extends CI_Controller {
         } elseif ($page == 'chapter') {
             $this->session->set_userdata(array('curr_segment_chapter' => $segment));
         }
+        echo $segment;
     }
 
 }
