@@ -1,5 +1,5 @@
 <?php 
-    $setting = $this->lib_mod->detail('setting', array('id'=>1));
+    $setting = [];
  ?>
 <html lang="en" class="no-js">
 <!--<![endif]-->

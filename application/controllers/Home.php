@@ -40,7 +40,7 @@ class Home extends CI_Controller {
         $admin = $this->lib_mod->detail('admin', array('admin_name' => $username, 'admin_password' => $password, 'admin_status' => 1));
 
         if (count($admin)) {
-            $config = $this->lib_mod->detail('setting', array('id' => 1));
+           // $config = $this->lib_mod->detail('setting', array('id' => 1));
 
             $this->session->set_userdata('admin_id', $admin[0]['admin_id']);
             $this->session->set_userdata('admin_fullname', $admin[0]['admin_fullname']);
