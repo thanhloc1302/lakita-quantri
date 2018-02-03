@@ -16,10 +16,9 @@ class learn extends CI_Controller {
     }
 
     function index() {
-       if( $this->admin_id  != 35 &&  $this->admin_id !=37)
-        {
-            header('Content-Type: text/html; charset=utf-8');            
-            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "'.base_url().'"</script>';
+        if ($this->admin_id != 35 && $this->admin_id != 37) {
+            header('Content-Type: text/html; charset=utf-8');
+            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
 
@@ -52,14 +51,13 @@ class learn extends CI_Controller {
         else
             $module = 'add_learn';
 
-        if( $this->admin_id  != 35 &&  $this->admin_id !=37)
-        {
-            header('Content-Type: text/html; charset=utf-8');            
-            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "'.base_url().'"</script>';
+        if ($this->admin_id != 35 && $this->admin_id != 37) {
+            header('Content-Type: text/html; charset=utf-8');
+            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
-        
-        
+
+
         $big_size = '268x150';
         $arr_big_size = explode('x', $big_size);
         $targ_w = intval($arr_big_size[0]);
@@ -80,9 +78,9 @@ class learn extends CI_Controller {
             if (!empty($att_description)) {
                 $attach_desc = implode('@', $att_description);
             }
-        
-            
-    
+
+
+
             $name = trim($this->input->post('name'));
             $title = trim($this->input->post('title'));
             $thumbnail = trim($this->input->post('thumbnail'));
@@ -94,11 +92,11 @@ class learn extends CI_Controller {
 
             $youtube = $this->input->post('youtube');
             $youtube = end(explode('?v=', $youtube));
-            $trial_learn = ( $this->input->post('trial_learn') != '' )? 1 :0;
-            
+            $trial_learn = ( $this->input->post('trial_learn') != '' ) ? 1 : 0;
+
             $video_link = trim($this->input->post('video_link'));
-            $video = strstr( $video_link, 'data');
-            
+            $video = strstr($video_link, 'data');
+
             $data = array(
                 'name' => $name,
                 'youtube' => $youtube,
@@ -121,7 +119,7 @@ class learn extends CI_Controller {
                 'content' => trim($this->input->post('content')),
                 'admin_id_add' => $this->admin_id,
                 'time_release' => strtotime($this->input->post('time_release')),
-               'trial_learn'=>$trial_learn
+                'trial_learn' => $trial_learn
             );
 
             $search = $this->lib_mod->make_url($name . ' ' . $title . ' ' . $meta_keywords . ' ' . $tag . ' ' . $id);
@@ -189,7 +187,7 @@ class learn extends CI_Controller {
         }
 
         $data['row'] = $this->lib_mod->detail('learn', array('id' => $id));
-        $data['courses'] = $this->lib_mod->load_all('courses', 'id, name', array('status' => 1), '', '', '');//array('sort' => 'desc'));
+        $data['courses'] = $this->lib_mod->load_all('courses', 'id, name', array('status' => 1), '', '', ''); //array('sort' => 'desc'));
         if (isset($data['row'][0]))
             $courses_id = $data['row'][0]['courses_id'];
         else
@@ -218,10 +216,9 @@ class learn extends CI_Controller {
     }
 
     function status($id, $status) {
-       if( $this->admin_id  != 35 &&  $this->admin_id !=37)
-        {
-            header('Content-Type: text/html; charset=utf-8');            
-            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "'.base_url().'"</script>';
+        if ($this->admin_id != 35 && $this->admin_id != 37) {
+            header('Content-Type: text/html; charset=utf-8');
+            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
 
@@ -248,10 +245,9 @@ class learn extends CI_Controller {
     }
 
     function delete($items_id = array()) {
-        if( $this->admin_id  != 35 &&  $this->admin_id !=37)
-        {
-            header('Content-Type: text/html; charset=utf-8');            
-            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "'.base_url().'"</script>';
+        if ($this->admin_id != 35 && $this->admin_id != 37) {
+            header('Content-Type: text/html; charset=utf-8');
+            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
 
@@ -291,10 +287,9 @@ class learn extends CI_Controller {
         else
             $menu_id = $courses_id;
 
-       if( $this->admin_id  != 35 &&  $this->admin_id !=37)
-        {
-            header('Content-Type: text/html; charset=utf-8');            
-            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "'.base_url().'"</script>';
+        if ($this->admin_id != 35 && $this->admin_id != 37) {
+            header('Content-Type: text/html; charset=utf-8');
+            echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
 
@@ -318,9 +313,9 @@ class learn extends CI_Controller {
             $data['key_word'] = $key_word = $result[4];
             $data['status'] = $status = $result[6];
             $data['courses_id'] = $courses_id = $menu_parent = $menu_id = $result[8];
-            
-            
-            
+
+
+
 //            if ($courses_id != '0') {
 //                var_dump($courses_id);
 //                $cate_label = substr($courses_id, 0, 1);
@@ -350,12 +345,12 @@ class learn extends CI_Controller {
             }
             $total = $this->search_mod->count_learn($key_word, $status, $courses_id);
 
-            
+
             $data['rows'] = $this->search_mod->load_learn($key_word, $status, $courses_id, $per_page, $offset);
-         
-           
-        
-            
+
+
+
+
             $base_url = site_url('learn/result_search/key_word/' . $key_word . '/status/' . $status . '/courses_id/' . $courses_id . '/');
             $config['base_url'] = $base_url;
             $config['per_page'] = $per_page;
@@ -370,6 +365,83 @@ class learn extends CI_Controller {
             $data['content'] = 'learn/index';
             $data['courses'] = $this->lib_mod->load_all('courses', 'id, name', array('status' => 1), '', '', array('sort' => 'desc'));
             $this->load->view('template', $data);
+        }
+    }
+
+    function import_learn_list() {
+
+        $post = $this->input->post();
+        if (isset($post['submit'])) {
+            $file_path = '';
+            $config['upload_path'] = './public/list_learn';
+            $config['allowed_types'] = 'xls|xlsx';
+            $config['max_size'] = '100000';
+            $config['file_name'] = 'list-learn-' . date('d-m-Y-H-i');
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('file')) {
+                $data = $this->upload->data();
+                $file_path = $data['full_path'];
+                $this->_import_learn_list($file_path);
+                echo '<script>alert("Thêm danh sách khóa học thành công !");</script>';
+                echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+            } else {
+                echo '<script>alert("Có lỗi xảy ra !");</script>';
+                echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+            }
+        } else {
+            echo '<script>alert("Thêm danh sách khóa học thành công !");</script>';
+            echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+        }
+    }
+
+    private function _import_learn_list($file_path) {
+        $this->load->model('learn_model');
+        $this->load->library('PHPExcel');
+        $objPHPExcel = PHPExcel_IOFactory::load($file_path);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $data1 = $sheet->rangeToArray('A2:D500');
+        return $data1;
+        die;
+        foreach ($data1 as $row) {
+            if ($row[0] != '') {
+                $name = $row[2];
+                $name = strtolower($name);
+
+                $name = trim($name);
+
+                $part = array('/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/',
+                    '/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/',
+                    '/i|í|ì|ỉ|ĩ|ị/',
+                    '/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/',
+                    '/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/',
+                    '/ý|ỳ|ỷ|ỹ|ỵ/',
+                    '/đ/',
+                    '/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/',
+                    '/\s+/'
+                );
+                $arr = array('a', 'e', 'i', 'o', 'u', 'y', 'd', '', ' ');
+
+                $slug = str_replace(' ', '-', preg_replace($part, $arr, $name));
+
+                $search = $this->lib_mod->make_url($name . ' ' . $row[2]);
+
+                $search = str_replace('-', ' ', $search);
+
+                $data = array('name' => $row[2],
+                    'courses_id' => $row[0],
+                    'chapter_id' => $row[1],
+                    'create_date' => time(),
+                    'title' => $row[2],
+                    'slug' => $slug,
+                    'status' => 1,
+                    'admin_id_add' => 35,
+                    'hot' => 0,
+                    'search' => $search,
+                    'sort' => $row[3]
+                );
+
+                $this->learn_model->insert($data);
+            }
         }
     }
 
