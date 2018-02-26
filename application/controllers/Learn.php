@@ -378,15 +378,40 @@ class learn extends CI_Controller {
             $config['max_size'] = '100000';
             $config['file_name'] = 'list-learn-' . date('d-m-Y-H-i');
             $this->load->library('upload', $config);
-            if ($this->upload->do_upload('file')) {
-                $data = $this->upload->data();
-                $file_path = $data['full_path'];
-                $this->_import_learn_list($file_path);
-                echo '<script>alert("Thêm danh sách khóa học thành công !");</script>';
-                echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
-            } else {
-                echo '<script>alert("Có lỗi xảy ra !");</script>';
-                echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+            if ($post['upload'] == 'learn_list') {
+                if ($this->upload->do_upload('file')) {
+                    $data = $this->upload->data();
+                    $file_path = $data['full_path'];
+                    $this->_import_learn_list($file_path);
+                    echo '<script>alert("Thêm danh sách khóa học thành công !");</script>';
+                    echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+                } else {
+                    echo '<script>alert("Có lỗi xảy ra !");</script>';
+                    echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+                }
+            }
+            if ($post['upload'] == 'link_list') {
+                if ($this->upload->do_upload('file_link')) {
+                    $data = $this->upload->data();
+                    $file_path = $data['full_path'];
+                    $this->_import_link_list($file_path);
+                    echo '<script>alert("Cập nhật link video thành công !");</script>';
+                    echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+                } else {
+                    echo '<script>alert("Có lỗi xảy ra !");</script>';
+                    echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+                }
+            }if ($post['upload'] == 'attach_file_list') {
+                if ($this->upload->do_upload('attach_file')) {
+                    $data = $this->upload->data();
+                    $file_path = $data['full_path'];
+                    $this->_import_attach_file_list($file_path);
+                    echo '<script>alert("Cập nhật tài liệu thành công !");</script>';
+                    echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+                } else {
+                    echo '<script>alert("Có lỗi xảy ra !");</script>';
+                    echo "<script>location.href='" . $_SERVER['HTTP_REFERER'] . "';</script>";
+                }
             }
         } else {
             echo '<script>alert("Thêm danh sách khóa học thành công !");</script>';
@@ -394,14 +419,34 @@ class learn extends CI_Controller {
         }
     }
 
+    // thay đổi link video bằng danh sách trong file excel
+    private function _import_link_list($file_path) {
+        $this->load->model('learn_model');
+        $this->load->library('PHPExcel');
+        $objPHPExcel = PHPExcel_IOFactory::load($file_path);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $data1 = $sheet->rangeToArray('A2:B500');
+        foreach ($data1 as $row) {
+            if ($row[0] != '') {
+                $learn_id = $row[0];
+                $where = array('id' => $learn_id);
+                
+                $link = $row[1];
+                $video_link = trim($link);
+                $data = array('video_file' => 'data/source/'.$video_link);
+              
+                $this->learn_model->update($where,$data);
+            }
+        }
+    }
+    
+    //thêm bài học bằng danh sách trong file excel
     private function _import_learn_list($file_path) {
         $this->load->model('learn_model');
         $this->load->library('PHPExcel');
         $objPHPExcel = PHPExcel_IOFactory::load($file_path);
         $sheet = $objPHPExcel->getActiveSheet();
         $data1 = $sheet->rangeToArray('A2:D500');
-        return $data1;
-        die;
         foreach ($data1 as $row) {
             if ($row[0] != '') {
                 $name = $row[2];
@@ -441,6 +486,27 @@ class learn extends CI_Controller {
                 );
 
                 $this->learn_model->insert($data);
+            }
+        }
+    }
+
+    // thay đổi link video bằng danh sách trong file excel
+    private function _import_attach_file_list($file_path) {
+        $this->load->model('learn_model');
+        $this->load->library('PHPExcel');
+        $objPHPExcel = PHPExcel_IOFactory::load($file_path);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $data1 = $sheet->rangeToArray('A2:B1000');
+        foreach ($data1 as $row) {
+            if ($row[0] != '') {
+                $learn_id = $row[0];
+                $where = array('id' => $learn_id);
+                
+                $attach_file = $row[1];
+                $attach_file = trim($attach_file);
+                $data = array('attach_file' => 'data/source/'.$attach_file);
+              
+                $this->learn_model->update($where,$data);
             }
         }
     }
