@@ -184,7 +184,7 @@
                     </a>
                 </li>
 
-                <li class="group_courses">
+<!--                <li class="group_courses">
                     <a href="<?php echo base_url(); ?>group_courses">
                         <i class="fa fa fa-file-text"></i>
                         <span class="title">
@@ -193,7 +193,7 @@
                         <span class="selected">
                         </span>
                     </a>
-                </li>
+                </li>-->
 
                 <li class="courses">
                     <a href="<?php echo base_url(); ?>courses">
@@ -243,9 +243,19 @@
 <?php if ($this->admin_id == 35 || $this->admin_id == 38) { ?>
                 <li class="student">
                     <a href="<?php echo base_url(); ?>student">
-                        <i class="fa fa fa-file-text"></i>
+                        <i class="fa fa-users"></i>
                         <span class="title">
                             Quản trị học viên
+                        </span>
+                        <span class="selected">
+                        </span>
+                    </a>
+                </li>
+                <li class="student">
+                    <a href="<?php echo base_url(); ?>student/online">
+                        <i class="fa fa-user"></i>
+                        <span class="title">
+                            Học viên đang online
                         </span>
                         <span class="selected">
                         </span>

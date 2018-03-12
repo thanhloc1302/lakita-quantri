@@ -131,7 +131,7 @@ class Student extends CI_Controller {
                 'address' => $address,
                 'status' => $this->input->post('status') == 1 ? 1 : 0,
                 'gender' => $this->input->post('gender') == 1 ? 1 : 0,
-                'admin_id' => $this->admin_id,
+               // 'admin_id' => $this->admin_id,
                 'note' => trim($this->input->post('note')),
                 'birthday' => strtotime($this->input->post('birthday'))
             );
@@ -177,7 +177,7 @@ class Student extends CI_Controller {
                         $data_stu_cour = array(
                             'student_id' => $new_id,
                             'courses_id' => $cour_id,
-                            'admin_id' => $this->admin_id,
+                            //'admin_id' => $this->admin_id,
                             'status' => 1,
                             'create_date' => time(),
                         );

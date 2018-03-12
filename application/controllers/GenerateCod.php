@@ -23,7 +23,7 @@ class GenerateCod extends CI_Controller {
         $data['header'] = 'list_base_header';
         $data['footer'] = 'list_base_footer';
         $data['content'] = 'generateCod/index';
-        $data['courses'] = $this->lib_mod->load_all('courses', '', array('status' => 1), '', '', array('sort' => 'desc'));
+        $data['courses'] = $this->lib_mod->load_all('courses', '', array('status' => 1), '', '', array('course_code' => 'desc'));
         $this->load->view('template', $data);
     }
 
@@ -33,10 +33,37 @@ class GenerateCod extends CI_Controller {
             echo '<script>alert("Bạn không có quyền truy cập module này."); window.location = "' . base_url() . '"</script>';
             exit;
         }
-        $prefix = array(37 => 'E100', 41 => 'E200', 16 => 'E300', 10 => 'E110', 65 => 'TC100',
-            66 => 'KT100', 67 => 'E400', 68 => 'KT200', 69 => 'E130', 71 => 'KT300', 72 => 'KT500',
-            73 => 'KT400', 74 => 'KT600', 75 => 'EM100', 77 => 'KT800', 78 => 'KT210', 80 => 'KT120' , 86 => 'KT260', 87 => 'KT250', 88 => 'KT240', 'combo' => 'CB100',
-            'CBKT210' => 'CBKT210', 'CBKT400' => 'CBKT400', 'CBKT800' => 'CBKT800', 'CBKT110' => 'CBKT110', 'CBKT130' => 'CBKT130');
+
+        $prefix = array(
+                        10 => 'E110', 
+                        16 => 'E300',
+                        37 => 'E100', 
+                        41 => 'E200', 
+                        65 => 'TC100',
+                        66 => 'KT100', 
+                        67 => 'E400', 
+                        68 => 'KT200', 
+                        69 => 'E130', 
+                        71 => 'KT300', 
+                        72 => 'KT500',
+                        73 => 'KT400', 
+                        74 => 'KT600', 
+                        75 => 'EM100', 
+                        77 => 'KT800', 
+                        78 => 'KT210', 
+                        80 => 'KT120', 
+                        81 => 'KT130',
+                        82 => 'KT110',
+                        83 => 'Y100',
+                        84 => 'KT220', 
+                        85 => 'BH100',
+                        'combo' => 'CB100',
+                        'CBKT210' => 'CBKT210', 
+                        'CBKT400' => 'CBKT400', 
+                        'CBKT800' => 'CBKT800', 
+                        'CBKT110' => 'CBKT110', 
+                        'CBKT130' => 'CBKT130');
+
         $methodID = array('cod' => 1, 'bank' => 2, 'direct' => 3);
         $courseID = $this->input->post('courseID');
         $method = $this->input->post('method');

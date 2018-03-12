@@ -57,9 +57,7 @@ $config = array(
 
 	//'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
 	
-	//'base_url' => 'http://lakita.vn',
-        'base_url' => 'http://localhost:8888/lakita_quan_tri_muon_khoc/lakita_quantri',
-
+	'base_url' => 'http://lakita.vn',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -79,8 +77,8 @@ $config = array(
 	| with final /
 	|
 	*/
-	//'current_path' => '../../../../data/source/',
-        'current_path' => '../../../data/source/',
+	'current_path' => '../../../../data/source/',
+
 	/*
 	|--------------------------------------------------------------------------
 	| relative path from filemanager folder to thumbs folder

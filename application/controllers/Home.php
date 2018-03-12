@@ -40,7 +40,7 @@ class Home extends CI_Controller {
         $admin = $this->lib_mod->detail('admin', array('admin_name' => $username, 'admin_password' => $password, 'admin_status' => 1));
 
         if (count($admin)) {
-            $config = $this->lib_mod->detail('setting', array('id' => 1));
+           // $config = $this->lib_mod->detail('setting', array('id' => 1));
 
             $this->session->set_userdata('admin_id', $admin[0]['admin_id']);
             $this->session->set_userdata('admin_fullname', $admin[0]['admin_fullname']);
@@ -240,7 +240,9 @@ class Home extends CI_Controller {
         $this->load->library('session');
         $segment = $this->input->post('curr');
         $page = $this->input->post('page');
-
+        
+        
+        
         if ($page == 'learn') {
             $this->session->set_userdata(array('curr_segment_learn' => $segment));
         } elseif ($page == 'course') {
@@ -252,6 +254,7 @@ class Home extends CI_Controller {
         } elseif ($page == 'chapter') {
             $this->session->set_userdata(array('curr_segment_chapter' => $segment));
         }
+        echo $segment;
     }
 
 }
