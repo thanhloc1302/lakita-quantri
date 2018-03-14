@@ -614,9 +614,9 @@ class News extends CI_Controller {
 
             $config['uri_segment'] = 9;
 
-            $data['paging'] = $this->pagination->create_links();
-
             $this->pagination->initialize($config);
+
+            $data['paging'] = $this->pagination->create_links();
 
             $data['total'] = $total;
 

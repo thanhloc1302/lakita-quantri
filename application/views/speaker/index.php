@@ -206,7 +206,7 @@
 
 							<div class="btn-group pull-right">								   
 								<div class="dataTables_paginate paging_bootstrap pull-right">
-						        	<?php echo $paging ?>
+						        	<?php if (isset($paging)) echo $paging ?>
 							   </div>								
 							</div>
 						</div>

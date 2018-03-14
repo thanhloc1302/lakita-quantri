@@ -410,9 +410,9 @@ class Album_image extends CI_Controller
             $config['base_url']         = $base_url;
             $config['per_page']         = $per_page;    
             $config['total_rows']       = $total;
-            $config['uri_segment']      = 9;     
-            $data['paging']         = $this->pagination->create_links();                        
+            $config['uri_segment']      = 9;                            
             $this->pagination->initialize($config); 
+            $data['paging']         = $this->pagination->create_links(); 
             $data['total'] = $total;
             $data['is_search'] = 1;
             $data['header']   = 'list_base_header';
