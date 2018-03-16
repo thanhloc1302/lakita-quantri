@@ -140,6 +140,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="control-label pull-left"><i>Load HTML5 video</i></label>
+                                    <input type="checkbox" value="1" name="is_exception" <?php if(isset($row[0]) && $row[0]['is_exception']==1) echo 'checked'; ?> class="make-switch" style="width:100%!important;" data-on-label="&nbsp;Yes&nbsp;" data-off-label="No">
+                                </div>
+
+                                <div class="form-group">
                                     <label class="control-label pull-left"><i>Giới tính</i></label>
                                     <input type="checkbox" value="1" name="gender" <?php if(isset($row[0]) && $row[0]['gender']==1) echo 'checked';?> class="make-switch" style="width:100%!important;" data-on-label="&nbsp;Nam&nbsp;" data-off-label="Nữ">
                                 </div>  
