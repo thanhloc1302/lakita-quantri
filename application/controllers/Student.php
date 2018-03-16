@@ -131,6 +131,7 @@ class Student extends CI_Controller {
                 'address' => $address,
                 'status' => $this->input->post('status') == 1 ? 1 : 0,
                 'gender' => $this->input->post('gender') == 1 ? 1 : 0,
+                'is_tutor' => $this->input->post('is_tutor') == 1 ? 1 : 0,
                // 'admin_id' => $this->admin_id,
                 'note' => trim($this->input->post('note')),
                 'birthday' => strtotime($this->input->post('birthday'))

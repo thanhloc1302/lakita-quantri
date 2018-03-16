@@ -132,7 +132,12 @@
                                 <div class="form-group">
                                     <label class="control-label pull-left"><i>Trạng thái</i></label>
                                     <input type="checkbox" value="1" name="status" <?php if(isset($row[0]) && $row[0]['status']==1) echo 'checked';?> class="make-switch" style="width:100%!important;" data-on-label="&nbsp;Hoạt động&nbsp;" data-off-label="Lưu nháp">
-                                </div>  
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label pull-left"><i>Là trợ giảng</i></label>
+                                    <input type="checkbox" value="1" name="is_tutor" <?php if(isset($row[0]) && $row[0]['is_tutor']==1) echo 'checked'; ?> class="make-switch" style="width:100%!important;" data-on-label="&nbsp;Yes&nbsp;" data-off-label="No">
+                                </div>
 
                                 <div class="form-group">
                                     <label class="control-label pull-left"><i>Giới tính</i></label>
